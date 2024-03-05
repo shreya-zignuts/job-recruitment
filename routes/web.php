@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\JobListingController;
 
 /*
@@ -33,10 +34,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/employer/dashboard', [JobListingController::class, 'index'])->name('employer.dashboard');
     Route::get('/create', [JobListingController::class, 'create'])->name('employer.create');
-    Route::post('/store',[JobListingController::class, 'store'])->name('employer.store');
-
+    Route::post('/job-listing',[JobListingController::class, 'store'])->name('employer.store');
     Route::get('/show/{id}',[JobListingController::class, 'show_job_listings'])->name('employer.show');
-    
+
+
 });
     Route::get('/job-seeker/dashboard', [ProfileController::class, 'index'])->name('job_seeker.dashboard');
 

@@ -24,7 +24,7 @@
         <div>
             <x-input-label for="role" />
             <x-select-role-dropdown id="role" :roles="['job_seeker', 'employer']"/> 
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />    
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />    
         </div>
 
         <!-- Email Address -->

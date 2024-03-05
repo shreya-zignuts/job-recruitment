@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\JobListing;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -12,6 +13,6 @@ class Category extends Model
     protected $fillable = ['name'];
 
     public function jobListings() {
-        return $this->belongsToMany(JobListing::class);
+        return $this->belongsToMany(JobListing::class, 'job_listing_category');
     }
 }

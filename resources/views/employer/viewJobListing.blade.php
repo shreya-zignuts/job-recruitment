@@ -7,35 +7,48 @@
                     </div></a>
             </div>
             <div>
-                <div class="container text-center mt-5">
-                             <ul class="list-group card-body">
-                                <li class="list-group-item list-group-item-dark mt-5" aria-current="true">Task Name</li>
-                                <li class="list-group-item">{{ $job->company_name }}</li>
-                            </ul>
-                            <ul class="list-group card-body">
-                                <li class="list-group-item list-group-item-dark mt-5" aria-current="true">Task Name</li>
-                                <li class="list-group-item">{{ $job->title }}</li>
-                            </ul>
-                            <ul class="list-group">
-                            <li class="list-group-item list-group-item-dark mt-5" aria-current="true">Description</li>
-                            <li class="list-group-item">{{ $job->description }}</li>
-                        </ul> 
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-dark mt-5" aria-current="true">Requirements</li>
-                            <li class="list-group-item">{{ $job->requirements }}</li>
-                        </ul> 
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-dark mt-5" aria-current="true">Location</li>
-                            <li class="list-group-item">{{ $job->location }}</li>
-                        </ul> 
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-dark mt-5" aria-current="true">Salary</li>
-                            <li class="list-group-item">{{ $job->salary }}</li>
-                        </ul> 
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-dark mt-5" aria-current="true">Status</li>
-                            <li class="list-group-item">{{ $job->status }}</li>
-                        </ul> 
+                <div class="container text-center outline outline-offset-4 outline-gray-500 sm:rounded-lg mt-1 bg-black w-1/2 p-6">
+                            <div class="w-1/2 mt-1 block w-sm p-2 bg-gray-500 rounded-lg">
+                                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold" aria-current="true">Company Name
+                                    <div class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">{{ $job->company_name }}</div>
+                                </div>
+                            </div>
+                            <div class="grid justify-items-end">
+                                <div class="w-1/2 mt-1 block justify-end w-sm p-2 bg-gray-500 rounded-lg">
+                                    <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold" aria-current="true">Job Title
+                                        <div class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">{{ $job->title }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-1/2 mt-1 block w-sm p-2 bg-gray-500 rounded-lg">
+                                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold" aria-current="true">Description
+                                    <div class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">{{ $job->description }}</div>
+                                </div>
+                            </div>
+                            <div class="grid justify-items-end">
+                                <div class="w-1/2 mt-1 block justify-end w-sm p-2 bg-gray-500 rounded-lg">
+                                    <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold" aria-current="true">Requirements
+                                        <div class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">{{ $job->requirements }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-1/2 mt-1 block w-sm p-2 bg-gray-500 rounded-lg">
+                                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold" aria-current="true">Location
+                                    <div class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">{{ $job->location }}</div>
+                                </div>
+                            </div>
+                            <div class="grid justify-items-end">
+                                <div class="w-1/2 mt-1 block justify-end w-sm p-2 bg-gray-500 rounded-lg">
+                                    <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold" aria-current="true">Salary
+                                        <div class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">{{ $job->salary }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-1/2 mt-1 block w-sm p-2 bg-gray-500 rounded-lg">
+                                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold" aria-current="true">Status
+                                    <div class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">{{ $job->status }}</div>
+                                </div>
+                            </div>
                 </div>      
             </div>
 </x-app-layout>
