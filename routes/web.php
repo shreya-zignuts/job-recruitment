@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\JobListingController;
@@ -20,9 +21,9 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('employer.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/employer/dashboard', [JobListingController::class, 'index'])->name('employer.dashboard');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,13 +33,18 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/employer/dashboard', [JobListingController::class, 'index'])->name('employer.dashboard');
+    Route::get('/job-listing', [JobListingController::class, 'index'])->name('employer.dashboard');
     Route::get('/create', [JobListingController::class, 'create'])->name('employer.create');
-    Route::post('/job-listing',[JobListingController::class, 'store'])->name('employer.store');
-    Route::get('/show/{id}',[JobListingController::class, 'show_job_listings'])->name('employer.show');
-
+    Route::post('/store',[JobListingController::class, 'store'])->name('employer.store');
+    Route::get('/view/{id}',[JobListingController::class, 'show_job_listings'])->name('employer.show');
+    Route::get('/edit/{id}',[JobListingController::class, 'edit_form'])->name('employer.edit');
+    Route::post('/update/{id}', [JobListingController::class, 'update'])->name('employer.update');
+    Route::post('/delete/{id}', [JobListingController::class, 'delete'])->name('employer.delete');
 
 });
-    Route::get('/job-seeker/dashboard', [ProfileController::class, 'index'])->name('job_seeker.dashboard');
+
+    Route::get('/jobSeeker/dashboard', [UserController::class, 'index'])->name('jobSeeker.dashboard');
+
+
 
 require __DIR__.'/auth.php';

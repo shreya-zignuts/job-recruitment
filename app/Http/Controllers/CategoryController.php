@@ -13,7 +13,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::has('jobListings')->with('jobListings')->get();
         return view('employer.categories', compact('categories'));
     }
 

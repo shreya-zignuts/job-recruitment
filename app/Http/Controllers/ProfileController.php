@@ -11,10 +11,6 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function index()
-    {
-        return view('job_seeker.dashboard');
-    }
     /**
      * Display the user's profile form.
      */
