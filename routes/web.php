@@ -22,8 +22,10 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/employer/dashboard', [JobListingController::class, 'index'])->name('employer.dashboard');
+    Route::get('/employer/dashboard', [JobListingController::class, 'index'])->name('employer.dashboard')->middleware('can:isEmployer');
+    Route::get('/job_seeker/dashboard', [UserController::class, 'index'])->name('job_seeker.dashboard')->middleware('can:isJobSeeker');
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,14 +38,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/job-listing', [JobListingController::class, 'index'])->name('employer.dashboard');
     Route::get('/create', [JobListingController::class, 'create'])->name('employer.create');
     Route::post('/store',[JobListingController::class, 'store'])->name('employer.store');
-    Route::get('/view/{id}',[JobListingController::class, 'show_job_listings'])->name('employer.show');
+    Route::get('/show/{id}',[JobListingController::class, 'show_job_listings'])->name('employer.show');
     Route::get('/edit/{id}',[JobListingController::class, 'edit_form'])->name('employer.edit');
     Route::post('/update/{id}', [JobListingController::class, 'update'])->name('employer.update');
     Route::post('/delete/{id}', [JobListingController::class, 'delete'])->name('employer.delete');
 
 });
 
-    Route::get('/jobSeeker/dashboard', [UserController::class, 'index'])->name('jobSeeker.dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/view/{id}',[UserController::class, 'show_listings'])->name('job_seeker.show');
+    Route::get('/alllistings',[UserController::class, 'all_job_listings'])->name('job_seeker.job_listings');
+});
 
 
 

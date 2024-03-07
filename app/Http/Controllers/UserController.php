@@ -14,4 +14,16 @@ class UserController extends Controller
         $categories = Category::all();
         return view('job_seeker.dashboard',compact('jobs','categories'));
     }
+
+    public function show_listings($id){
+        $job = JobListing::findOrFail($id);
+        $categories = $job->categories;
+        return view('job_seeker.actions.viewJobListing', compact('job', 'categories'));
+    }
+    
+
+    public function all_job_listings(){
+        $jobs = JobListing::all();
+        return view ('job_seeker.showAllListings', ['jobs' => $jobs]);
+    }
 }

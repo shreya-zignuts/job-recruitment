@@ -12,7 +12,7 @@ class JobListingController extends Controller
 {
     public function index(Request $request){
 
-        $jobs = JobListing::with('categories')->where('user_id', auth()->user()->id)->get();
+        $jobs = JobListing::with('categories')->where('user_id', auth()->user()->id)->paginate(7);
 
         return view('employer.joblisting', compact('jobs'));
     }
@@ -77,7 +77,7 @@ class JobListingController extends Controller
         ]);
         
         $jobs = JobListing::findOrFail($id);
-        $jobs->update($jobListings);
+        $jobs->categories()->sync($request->input('categories'));
 
         return redirect()->route('employer.dashboard')->with('success', "JobListing Updated Successfully");
     }
