@@ -46,7 +46,8 @@
                         <div class="col-md-3 mb-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $job->company_name }}</h5>
+                                    <h4 class="card-title">{{ $job->title }}</h4>
+                                    <h6 class="card-text">{{ $job->company_name }}</h6>
                                     <p class="card-text">{{ $job->description }}</p>
                                     <a href="{{ route('job_seeker.show',['id' => $job->id]) }}" class="btn btn-primary">View More</a>
                                 </div>
