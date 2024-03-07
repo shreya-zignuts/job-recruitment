@@ -48,6 +48,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/view/{id}',[UserController::class, 'show_listings'])->name('job_seeker.show');
     Route::get('/alllistings',[UserController::class, 'all_job_listings'])->name('job_seeker.job_listings');
+    Route::post('/filter-job-listings', [UserController::class, 'filterCategories'])->name('job_seeker.filter');
+    Route::get('/companies',[UserController::class, 'showAllCompanies'])->name('job_seeker.companies');
+    Route::get('/resumes',[UserController::class, 'showResume'])->name('job_seeker.resumes');
+
+
+
+
 });
 
 

@@ -13,7 +13,7 @@
                 <a href="{{ route('employer.create') }}"><button class="btn btn-dark p-2 mt-1">Create Job Title</button></a>
             </div>
         </div>
-            <table class="table table-bordered border-3 border-dark mt-3">
+            <table class="table table-bordered border-3 border-dark mt-3 text-center">
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">Categories</th>

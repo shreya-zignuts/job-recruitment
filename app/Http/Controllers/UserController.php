@@ -26,4 +26,28 @@ class UserController extends Controller
         $jobs = JobListing::all();
         return view ('job_seeker.showAllListings', ['jobs' => $jobs]);
     }
+
+    public function filterCategories(Request $request)
+    {
+        $request->validate([
+            'categories' => 'required|array',
+        ]);
+
+        $selectedCategories = $request->input('categories');
+
+        $jobs = JobListing::whereHas('categories', function ($query) use ($selectedCategories) {
+            $query->whereIn('id', $selectedCategories);
+        })->get();
+
+        return view('job_seeker.searchListings', ['jobs' => $jobs]);
+    }
+
+    public function showAllCompanies(){
+        $jobs = JobListing::all();
+        return view('job_seeker.companies',compact('jobs'));
+    }
+
+    public function showResume(){
+        return view('job_seeker.resume');
+    }
 }
