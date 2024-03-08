@@ -38,7 +38,7 @@
     </div>
   </header>
   <section>
-    <div class="row justify-content-center mt-4">
+    <div class="row justify-content-center mt-3">
         <div class="col-md-4">
             <form method="POST" action="{{ route('job_seeker.filter') }}">
                 @csrf

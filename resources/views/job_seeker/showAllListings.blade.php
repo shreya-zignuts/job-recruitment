@@ -32,16 +32,14 @@
         </div>
         </div>
     </header>
-    <div>
-    <a href="{{ route('job_seeker.dashboard') }}"><div class="fs-4 mb-3 mt-2">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-arrow-left-circle-fill ml-5" viewBox="0 0 16 16">
-    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"></path>
-    </svg>
-    </div></a>
-</div>
     <section>
         <div>
-            <h3 class="text-center h3 mt-5 p-2 bg-dark-subtle text-dark-emphasis">All Job Listings</h3>
+        <a href="{{ route('job_seeker.dashboard') }}"><div class="fs-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-arrow-left-circle-fill ml-5" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"></path>
+            </svg>
+            </div></a>
+            <h3 class="text-center h3 mt-3 p-2 bg-dark-subtle text-dark-emphasis">All Job Listings</h3>
             <div class="container text-center mt-5">
                 <div class="row">
                     @foreach ($jobs as $job) <!-- Displaying only 6 job listings -->

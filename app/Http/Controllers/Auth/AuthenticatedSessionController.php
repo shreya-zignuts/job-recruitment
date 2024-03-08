@@ -40,10 +40,15 @@ class AuthenticatedSessionController extends Controller
                 'message' => 'Unauthorizd'
             ], 401);
         }
+        else if(Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->role === 'job_seeker') {
+                return redirect()->route('job_seeker.dashboard');
+            } elseif ($user->role === 'employer') {
+                return redirect()->route('employer.dashboard');
+            }
+        }
 
-        $user = $request->user();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

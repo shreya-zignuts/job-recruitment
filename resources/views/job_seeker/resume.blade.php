@@ -38,26 +38,25 @@
       </div>
     </div>
   </header>
-  <div>
-    <a href="{{ route('job_seeker.dashboard') }}"><div class="fs-4 mb-3 mt-2">
+  <a href="{{ route('job_seeker.dashboard') }}"><div class="fs-4 mt-2">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-arrow-left-circle-fill ml-5" viewBox="0 0 16 16">
     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"></path>
     </svg>
     </div></a>
-</div>
   <section>
+        <div class="container">
         <div class="p-5 text-center bg-body-tertiary rounded-3">
-          <svg class="bi mt-4" style="color: var(--bs-indigo);" width="100" height="100"><use xlink:href="#bootstrap"></use></svg>
-          <h3 class="text-body-emphasis h3">
-            @if(Auth::user()->resume)
-              <p class="border border-dark p-3">Resume Uploaded Successfully.  Download it <a href="{{ route('download.resume') }}" style="color: gray;" onmouseover="this.style.color='black'" onmouseout="this.style.color='gray'">here</a>.</p></h3>
-              <div>
-                <div class="d-inline-flex mb-3 mt-1">
-                  <form action="{{ route('resume.show') }}" method="GET">
-                      @csrf
-                        <button class="btn btn-dark btn-md px-4 rounded-pill mt-5" type="submit">
-                          Show Resume
-                        </button>
+          @if(Auth::user()->resume)
+          <h1 class="h1">Taa-Daa !!!</h1>
+            <h3 class="text-body-emphasis h3">
+                <p class="border border-dark p-3 mt-5">Resume Uploaded Successfully.  Download it <a href="{{ route('download.resume') }}" style="color: gray;" onmouseover="this.style.color='black'" onmouseout="this.style.color='gray'">here</a>.</p></h3>
+                <div>
+                  <div class="d-inline-flex mb-3">
+                    <form action="{{ route('resume.show') }}" method="GET">
+                        @csrf
+                          <button class="btn btn-dark btn-md px-4 rounded-pill mt-5" type="submit">
+                            Show Resume
+                          </button>
                   </form>
                 </div>
                 <div class="d-inline-flex">
@@ -72,14 +71,17 @@
                 </div>
               </div>
               @else
-              <div class="border border-dark p-3">
+              <h1 class="h1">Show Your Best Resume Here !!</h1>
+              <div class="border border-dark p-3 mb-5 mt-5">
                 <h3 class="h3 text-center">Upload Resume</h3>
-                    <form action="{{ route('upload.resume') }}" class="mt-3" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('upload.resume') }}" class="mt-3 mb-3" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input class="btn btn-secondary" type="file" name="resume">
                         <button class="btn btn-dark" type="submit">Upload</button>
                     </form>
               </div>
-              @endif
-          </h3>
+            @endif
+              </h3>
+      </div>
+    </div>
   </section>

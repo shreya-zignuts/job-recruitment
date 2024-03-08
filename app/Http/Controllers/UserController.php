@@ -39,7 +39,7 @@ class UserController extends Controller
             $query->whereIn('id', $selectedCategories);
         })->get();
 
-        return view('job_seeker.searchListings', ['jobs' => $jobs]);
+        return view('job_seeker.searchListings', compact('jobs'));
     }
 
     public function showAllCompanies(){

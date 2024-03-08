@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('location');
             $table->decimal('salary', 10, 2);
             $table->enum('status', ['active', 'closed']);
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

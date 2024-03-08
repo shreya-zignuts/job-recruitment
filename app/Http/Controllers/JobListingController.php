@@ -45,9 +45,10 @@ class JobListingController extends Controller
 
         ]));
         
-        foreach ($request->categories as $category_id) {
-            $jobs->categories()->attach($jobs->id, ['category_id' => $category_id]);
-        }
+        // foreach ($request->categories as $category_id) {
+        //     $jobs->categories()->attach(['category_id' => $category_id]);
+        // }
+        $jobs->categories()->attach($request->categories);
 
         return redirect()->route('employer.dashboard')->with('success', 'Job Listing successful');
     }
@@ -77,7 +78,7 @@ class JobListingController extends Controller
         ]);
         
         $jobs = JobListing::findOrFail($id);
-        $jobs->categories()->sync($request->input('categories'));
+        $jobs->categories()->sync($request->categories);
 
         return redirect()->route('employer.dashboard')->with('success', "JobListing Updated Successfully");
     }
