@@ -7,7 +7,7 @@
                     </div></a>
             </div>
             <div>
-                <div class="container text-center outline outline-offset-4 w-1/2 outline-gray-500 sm:rounded-lg bg-black p-6">
+                <div class="container text-center outline outline-offset-4 w-1/2 outline-gray-500 sm:rounded-lg p-6">
                             <div class="mt-1 block w-sm p-2 bg-gray-500 rounded-lg">
                                 <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold text-center justify-center" aria-current="true">Categories
                                     <div class="list-group-item mt-2 font-medium text-black">

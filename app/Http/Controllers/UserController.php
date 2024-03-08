@@ -15,7 +15,7 @@ class UserController extends Controller
         return view('job_seeker.dashboard',compact('jobs','categories'));
     }
 
-    public function show_listings($id){
+    public function showListings($id){
         $job = JobListing::findOrFail($id);
         $categories = $job->categories;
         return view('job_seeker.actions.viewJobListing', compact('job', 'categories'));
@@ -43,7 +43,7 @@ class UserController extends Controller
     }
 
     public function showAllCompanies(){
-        $jobs = JobListing::paginate(7);
+        $jobs = JobListing::paginate(15);
         return view('job_seeker.companies',compact('jobs'));
     }
 

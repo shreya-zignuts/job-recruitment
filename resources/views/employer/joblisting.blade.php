@@ -58,7 +58,7 @@
                         <td class="align-middle text-center" style="border: none;">
                             <form action="{{ route('employer.delete', ['id' => $job->id]) }}" method="post">
                                 @csrf
-                                <button type="submit" onclick="return confirm('Are you sure you want to delete this task?')"><i class="bi bi-trash-fill"></i></button>
+                                <button onclick="return confirm('Are you sure you want to delete this task?')" class="align-middle text-center"><i class="bi bi-trash-fill"></i></button>
                             </form>
                         </td>
                     </tr>

@@ -23,7 +23,7 @@
           <li><a href="/job_seeker/dashboard" class="nav-link px-2 text-white">Home</a></li>
           <li><a href="{{ route('job_seeker.companies') }}" class="nav-link px-2 text-white">Companies</a></li>
           <li><a href="{{ route('job_seeker.job_listings') }}" class="nav-link px-2 text-white">Job Listings</a></li>
-          <li><a href="{{ route('job_seeker.resumes') }}" class="nav-link px-2 text-white">Resume</a></li>
+          <li><a href="{{ route('resume.form') }}" class="nav-link px-2 text-white">Resume</a></li>
         </ul>
         <form method="POST" action="{{ route('logout') }}">
           @csrf

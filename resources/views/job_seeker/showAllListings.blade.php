@@ -17,8 +17,8 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/job_seeker/dashboard" class="nav-link px-2 text-white">Home</a></li>
             <li><a href="{{ route('job_seeker.companies') }}" class="nav-link px-2 text-white">Companies</a></li>
-          <li><a href="{{ route('job_seeker.job_listings') }}" class="nav-link px-2 text-white">Job Listings</a></li>
-          <li><a href="{{ route('job_seeker.resumes') }}" class="nav-link px-2 text-white">Resume</a></li>
+            <li><a href="{{ route('job_seeker.job_listings') }}" class="nav-link px-2 text-white">Job Listings</a></li>
+            <li><a href="{{ route('resume.form') }}" class="nav-link px-2 text-white">Resume</a></li>
             </ul>
             <form method="POST" action="{{ route('logout') }}">
             @csrf
@@ -32,6 +32,13 @@
         </div>
         </div>
     </header>
+    <div>
+    <a href="{{ route('job_seeker.dashboard') }}"><div class="fs-4 mb-3 mt-2">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-arrow-left-circle-fill ml-5" viewBox="0 0 16 16">
+    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"></path>
+    </svg>
+    </div></a>
+</div>
     <section>
         <div>
             <h3 class="text-center h3 mt-5 p-2 bg-dark-subtle text-dark-emphasis">All Job Listings</h3>

@@ -17,17 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected function redirectTo()
-    {
-        if (auth()->user()->role === 'employer') {
-            return '/employer/dashboard';
-        } elseif (auth()->user()->role === 'job_seeker') {
-            return '/job_seeker/dashboard';
-        } else {
-            // Default redirection for other roles or if role is not defined
-            return '/dashboard';
-        }
-    }
+
+     public const HOME = '/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
