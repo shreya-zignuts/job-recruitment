@@ -39,5 +39,40 @@
     </div>
   </header>
   <section>
-    <h3 class="h3 text-center mt-3">Upload your resumes</h3>
+        <div class="p-5 text-center bg-body-tertiary rounded-3">
+          <svg class="bi mt-4" style="color: var(--bs-indigo);" width="100" height="100"><use xlink:href="#bootstrap"></use></svg>
+          <h3 class="text-body-emphasis h3">
+            @if(Auth::user()->resume)
+              <p class="border border-dark p-3">Resume Uploaded Successfully.  Download it <a href="{{ route('download.resume') }}" style="color: gray;" onmouseover="this.style.color='black'" onmouseout="this.style.color='gray'">here</a>.</p></h3>
+              <div>
+                <div class="d-inline-flex mb-3 mt-1">
+                  <form action="{{ route('resume.show') }}" method="GET">
+                      @csrf
+                        <button class="btn btn-dark btn-md px-4 rounded-pill mt-5" type="submit">
+                          Show Resume
+                        </button>
+                  </form>
+                </div>
+                <div class="d-inline-flex">
+                  @if(Auth::user()->resume)
+                      <form action="{{ route('delete.resume') }}" method="post">
+                        @csrf
+                        <button class="btn btn-dark btn-md px-4 rounded-pill mt-5" type="submit">
+                          Delete Resume
+                        </button>
+                      </form>
+                  @endif
+                </div>
+              </div>
+              @else
+              <div class="border border-dark p-3">
+                <h3 class="h3 text-center">Upload Resume</h3>
+                    <form action="{{ route('upload.resume') }}" class="mt-3" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input class="btn btn-secondary" type="file" name="resume">
+                        <button class="btn btn-dark" type="submit">Upload</button>
+                    </form>
+              </div>
+              @endif
+          </h3>
   </section>

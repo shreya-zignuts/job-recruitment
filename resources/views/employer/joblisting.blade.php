@@ -27,16 +27,16 @@
                     @foreach ($jobs as $job)
                     <tr>
                         <td class="align-middle text-center">
-                            @php $count = 0; @endphp
-                            @foreach($job->categories as $category)
+                        @php $count = 0; $totalCategories = count($job->categories); @endphp
+                        @foreach($job->categories as $category)
                             {{ $category->name }}
                             @php $count++; @endphp
-                            @if ($count % 3 == 0 && $count != count($job->categories))
-                            <br>
-                            @else
-                            ,
+                            @if ($count % 3 == 0 && $count != $totalCategories)
+                                , <br>
+                            @elseif ($count != $totalCategories)
+                                ,
                             @endif
-                            @endforeach
+                        @endforeach
                         </td>
                         <td class="align-middle text-center">{{ $job->title }}</td>
                         <td class="align-middle">{{ $job->description }}</td>

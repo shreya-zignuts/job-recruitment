@@ -34,17 +34,16 @@
     </header>
     <section>
         <div>
-            <h3 class="text-center h3 mt-3">All Job Listings</h3>
+            <h3 class="text-center h3 mt-5 p-2 bg-dark-subtle text-dark-emphasis">All Job Listings</h3>
             <div class="container text-center mt-5">
                 <div class="row">
                     @foreach ($jobs as $job) <!-- Displaying only 6 job listings -->
                         <div class="col-md-3 mb-4">
-                            <div class="card">
+                            <div class="card border border-4">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{ $job->title }}</h4>
-                                    <h6 class="card-text">{{ $job->company_name }}</h6>
+                                    <h4 class="card-title">{{ $job->company_name }}</h4>
                                     <p class="card-text">{{ $job->description }}</p>
-                                    <a href="{{ route('job_seeker.show',['id' => $job->id]) }}" class="btn btn-primary">View More</a>
+                                    <a href="{{ route('job_seeker.show',['id' => $job->id]) }}" style="color: black;" onmouseover="this.style.color='gray'" onmouseout="this.style.color='black'">View More</a>
                                 </div>
                             </div>
                         </div>

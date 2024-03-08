@@ -42,7 +42,7 @@
   <div>
     <div class="container mt-5">
         <table class="table table-bordered border-3 border-dark mt-3 text-center">
-                <thead class="table-dark">
+                <thead class="table-secondary border-dark">
                     <tr>
                         <th scope="col">Company Names</th>
                         <th scope="col">Description</th>
@@ -55,11 +55,27 @@
                         <td class="align-middle text-center">{{ $job->company_name }}</td>
                         <td class="align-middle">{{ $job->description }}</td>
                         <td class="align-middle text-center">
-                        <a href="{{ route('job_seeker.show',['id' => $job->id]) }}" class="btn btn-secondary">View More</a>
+                        <a href="{{ route('job_seeker.show',['id' => $job->id]) }}" style="color: gray;" onmouseover="this.style.color='black'" onmouseout="this.style.color='gray'">View More</a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
         </table>
+        <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        {{ $jobs->links('pagination::bootstrap-5') }}
+                        <style>
+                          .pagination .page-link {
+                              color: black;
+                          }
+                          .pagination .page-link:hover {
+                              color: black;
+                          }
+                          .pagination .page-item.active .page-link {
+                              background-color: black;
+                          }
+                        </style>
+                    </div>
+                </div>
     </div>
   </section>

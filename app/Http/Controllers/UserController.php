@@ -43,7 +43,7 @@ class UserController extends Controller
     }
 
     public function showAllCompanies(){
-        $jobs = JobListing::all();
+        $jobs = JobListing::paginate(7);
         return view('job_seeker.companies',compact('jobs'));
     }
 
