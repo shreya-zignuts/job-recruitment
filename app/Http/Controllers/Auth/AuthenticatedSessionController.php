@@ -35,12 +35,8 @@ class AuthenticatedSessionController extends Controller
             'remember_me' => 'boolean',
         ]);
         $credentials = request(['email','password']);
-        if(!Auth::attempt($credentials)){
-            return response()->json([
-                'message' => 'Unauthorizd'
-            ], 401);
-        }
-        else if(Auth::attempt($credentials)) {
+        
+        if(Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->role === 'job_seeker') {
                 return redirect()->route('job_seeker.dashboard');
@@ -48,6 +44,9 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->route('employer.dashboard');
             }
         }
+        
+        abort(401, 'Unauthorized');
+        
 
     }
 

@@ -66,7 +66,9 @@ class JobListingController extends Controller
 
     public function update(Request $request, $id){
 
-        $jobListings = $request->validate([
+        $jobs = JobListing::findOrFail($id);
+
+        $jobListing = $request->validate([
             'categories' => "required|array",
             'company_name' => "required",
             'title' => "required",
@@ -76,9 +78,9 @@ class JobListingController extends Controller
             'salary' => "required|regex:/^\d{1,8}(\.\d{1,2})?$/",
             'status' => 'required|in:active,closed',
         ]);
-        
-        $jobs = JobListing::findOrFail($id);
-        $jobs->categories()->sync($request->categories);
+        $jobs->update($jobListing);
+
+        $jobs->categories()->sync($request->input('categories'));
 
         return redirect()->route('employer.dashboard')->with('success', "JobListing Updated Successfully");
     }
