@@ -33,8 +33,9 @@ class AuthenticatedSessionController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string',
             'remember_me' => 'boolean',
+            'role' => 'required|in:job_seeker,employer',
         ]);
-        $credentials = request(['email','password']);
+        $credentials = request(['email','password','role']);
         
         if(Auth::attempt($credentials)) {
             $user = Auth::user();

@@ -23,6 +23,7 @@ class JobListingController extends Controller
     } 
 
     public function store(Request $request){
+        
         $request->validate([
             'categories' => "required|array",
             'company_name' => "required",

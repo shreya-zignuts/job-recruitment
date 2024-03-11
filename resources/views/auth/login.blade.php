@@ -1,4 +1,4 @@
-<div class="">
+<div>
     @if (Route::has('login'))
         <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
             @auth
@@ -27,9 +27,9 @@
 
         <!-- Role -->
         <div>
-            <x-input-label for="role" />
+            <x-input-label for="role" :value="__('Role')" class="mt-3" />
             <x-select-role-dropdown id="role" :roles="['job_seeker', 'employer']"/> 
-            <x-input-error :messages="$errors->get('role')" class="mt-2" />    
+            <x-input-error :messages="$errors->get('role')"/>    
         </div>
 
         <!-- Email Address -->
