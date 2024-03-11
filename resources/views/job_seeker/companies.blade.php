@@ -25,6 +25,7 @@
                         <use xlink:href="#bootstrap"></use>
                     </svg>
                 </a>
+                
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="/job_seeker/dashboard" class="nav-link px-2 text-white">Home</a></li>
@@ -45,7 +46,7 @@
         </div>
         </div>
     </header>
-    <div>
+    <div class="container">
         <a href="{{ route('job_seeker.dashboard') }}">
             <div class="fs-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"

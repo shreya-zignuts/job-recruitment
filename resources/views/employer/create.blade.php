@@ -55,7 +55,7 @@
                             <div>
                                 <x-input-label for="title" :value="__(' Job Title ')" />
                                 <x-text-input id="title" name="title" class="mt-1 block w-full"
-                                    placeholder="job title.." required autocomplete="name" />
+                                    placeholder="job title.." required autocomplete="title" />
                                 @error('title')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -64,8 +64,7 @@
                             <div>
                                 <x-input-label for="description" :value="__(' Description ')" />
                                 <textarea id="description" name="description"
-                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"" placeholder="
-                                    description of your job .." required autocomplete="name"></textarea>
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" placeholder="description of your job .." required autocomplete="name"></textarea>
                                 @error('description')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
