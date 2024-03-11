@@ -11,10 +11,4 @@ class CategoryController extends Controller
 
     protected $JobListingController;
 
-    public function index()
-    {
-        $categories = Category::has('jobListings')->with('jobListings')->get();
-        return view('employer.categories', compact('categories'));
-    }
-
 }

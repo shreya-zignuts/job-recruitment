@@ -9,11 +9,22 @@ use Illuminate\Support\Facades\Storage;
 
 class ResumeController extends Controller
 {
+    /**
+     * Display the resume upload form.
+     *
+     * @return \Illuminate\View\View
+     */
     public function showUploadForm()
     {
         return view('job_seeker.resume');
     }
 
+    /**
+     * Upload a resume file.
+     *
+     * @param  \Illuminate\Http\Request $request The HTTP request.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function upload(Request $request)
     {
         $request->validate([
@@ -33,6 +44,11 @@ class ResumeController extends Controller
         return redirect()->back()->with('success', 'Resume uploaded successfully!');
     }
 
+    /**
+     * Download the uploaded resume file.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function download()
     {
         $user = Auth::user();
@@ -49,6 +65,11 @@ class ResumeController extends Controller
         }
     }
 
+    /**
+     * Display the uploaded resume file.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function show()
     {
         $user = Auth::user();
@@ -59,13 +80,16 @@ class ResumeController extends Controller
 
         $resumePath = storage_path('app/' . $user->resume->path);
 
-        // Determine the content type of the file
         $contentType = mime_content_type($resumePath);
 
-        // Return the response with appropriate content type
         return response()->file($resumePath, ['Content-Type' => $contentType]);
     }
 
+    /**
+     * Delete the uploaded resume file.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete()
     {
         $user = Auth::user();
@@ -81,4 +105,3 @@ class ResumeController extends Controller
         }
     }
 }
-

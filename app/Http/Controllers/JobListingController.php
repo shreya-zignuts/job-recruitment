@@ -10,20 +10,36 @@ use App\Http\Controllers\Auth;
 
 class JobListingController extends Controller
 {
+    /**
+     * Display a listing of the job listings associated with categories.
+     *
+     * @param  \Illuminate\Http\Request $request The HTTP request.
+     * @return \Illuminate\View\View
+     */
     public function index(Request $request){
 
         $jobs = JobListing::with('categories')->where('user_id', auth()->user()->id)->paginate(7);
-
         return view('employer.joblisting', compact('jobs'));
     }
 
+    /**
+     * Show the form for creating a new job listing.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create(){
         $categories = Category::all();
         return view('employer.create',compact('categories'));
     } 
 
+    /**
+     * Store a newly created job listing in storage.
+     *
+     * @param  \Illuminate\Http\Request $request The HTTP request.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request){
-        
+
         $request->validate([
             'categories' => "required|array",
             'company_name' => "required",
@@ -54,17 +70,36 @@ class JobListingController extends Controller
         return redirect()->route('employer.dashboard')->with('success', 'Job Listing successful');
     }
 
+    /**
+     * Display the specified job listing.
+     *
+     * @param  int $id The job listing ID.
+     * @return \Illuminate\View\View
+     */
     public function show_job_listings($id){
         $jobs = JobListing::findOrFail($id);
         return view ('employer.actions.viewJobListing', ['job' => $jobs]);
     }
 
+    /**
+     * Show the form for editing the specified job listing.
+     *
+     * @param  int $id The job listing ID.
+     * @return \Illuminate\View\View
+     */
     public function edit_form($id){
         $jobs = JobListing::findOrFail($id);
         $categories = Category::all();
         return view('employer.actions.editJobListings', compact('jobs', 'categories'));
     }
 
+    /**
+     * Update the specified job listing in storage.
+     *
+     * @param  \Illuminate\Http\Request $request The HTTP request.
+     * @param  int $id The job listing ID.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id){
 
         $jobs = JobListing::findOrFail($id);
@@ -81,11 +116,17 @@ class JobListingController extends Controller
         ]);
         $jobs->update($jobListing);
 
-        $jobs->categories()->sync($request->input('categories'));
+        $jobs->categories()->sync($request->categories);
 
         return redirect()->route('employer.dashboard')->with('success', "JobListing Updated Successfully");
     }
 
+    /**
+     * Remove the specified job listing from storage.
+     *
+     * @param  int $id The job listing ID.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete($id){
         $jobs = JobListing::findOrFail($id);
         if(!$jobs){
