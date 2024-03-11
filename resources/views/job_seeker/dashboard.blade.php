@@ -72,7 +72,7 @@
             <h2 class="text-center h3 mt-4 bg-dark-subtle text-dark-emphasis text-black py-2">All Job Listings</h2>
             <div class="container text-center mt-5">
                 <div class="row">
-                    @foreach ($jobs->take(6) as $job)
+                    @foreach ($jobs->take(4) as $job)
                     <div class="col-md-6 mb-4">
                         <div class="card border border-4">
                             <div class="card-body">

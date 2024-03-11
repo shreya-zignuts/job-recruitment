@@ -94,6 +94,7 @@
                         @csrf
                         <input class="btn btn-secondary" type="file" name="resume">
                         <button class="btn btn-dark" type="submit">Upload</button>
+                        <x-input-error class="mt-2" :messages="$errors->get('resume')" />
                     </form>
                 </div>
                 @endif

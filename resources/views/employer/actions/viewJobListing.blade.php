@@ -1,3 +1,8 @@
+@if(session('success'))
+<div class="alert alert-success text-center" role="alert" id="success">
+    {{ session('success') }}
+</div>
+@endif
 <x-app-layout>
     <div>
         <a href="{{ route('employer.dashboard') }}">
