@@ -23,7 +23,7 @@ Step 1: Clone the Repository
 
 Clone the repository to your local machine using Git.
 ```bash
-$ git clone https://github.com/shreya-zignuts/job-recruitment
+$ git clone -b develop https://github.com/shreya-zignuts/job-recruitment
 ```
 
 Step 2: Navigate to the Project Directory
