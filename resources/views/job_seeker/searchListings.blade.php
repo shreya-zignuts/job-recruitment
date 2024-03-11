@@ -65,19 +65,9 @@
                         <div class="card-body">
                             <select class="select2-multiple form-control mt-3 text-center" name="categories[]"
                                 multiple="multiple" id="select2Multiple" style="width: 100%;">
-                                @php
-                                    $uniqueCategoryIds = [];
-                                @endphp
-                                @foreach ($jobs as $job)
-                                    @foreach ($job->categories as $category)
-                                        @if (!in_array($category->id, $uniqueCategoryIds))
+                                    @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            @php
-                                            $uniqueCategoryIds[] = $category->id;
-                                            @endphp
-                                        @endif
                                     @endforeach
-                                @endforeach
                             </select>
                         </div>
                         <div class="card-footer text-end">

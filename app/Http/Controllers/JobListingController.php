@@ -16,10 +16,10 @@ class JobListingController extends Controller
      * @param  \Illuminate\Http\Request $request The HTTP request.
      * @return \Illuminate\View\View
      */
-    public function index(Request $request){
+    public function index(){
 
         $jobs = JobListing::with('categories')->where('user_id', auth()->user()->id)->paginate(7);
-        return view('employer.joblisting', compact('jobs'));
+        return view('employer.joblisting', compact('jobs','categories'));
     }
 
     /**
