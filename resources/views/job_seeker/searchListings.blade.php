@@ -54,16 +54,16 @@
         </a>
     </div>
     <section>
-        <div class="row justify-content-center mt-3">
+        <div class="row justify-content-center">
             <div class="col-md-4">
                 <form method="POST" action="{{ route('job_seeker.filter') }}">
                     @csrf
-                    <div class="form-group mb-3 card mt-3" style="width: 100%;">
+                    <div class="form-group mb-3 card mt-1" style="width: 100%;">
                         <div class="card-header">
                             Select Categories
                         </div>
                         <div class="card-body">
-                            <select class="select2-multiple form-control mt-3 text-center" name="categories[]"
+                            <select class="select2-multiple form-control mt-1 text-center" name="categories[]"
                                 multiple="multiple" id="select2Multiple" style="width: 100%;">
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div>
-            <p class="text-center mt-3">Total results: {{ $jobs->count() }}</p>
+            <p class="text-center mt-4">Total results: {{ $jobs->count() }}</p>
         </div>
         <div>
             <h3 class="text-center h3 mt-3 text-decoration-underline">Searched Job Listings</h3>
