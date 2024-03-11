@@ -37,27 +37,29 @@ Route::middleware('auth')->group(function () {
 
 
     //Job Listing Routes
-    Route::get('/create', [JobListingController::class, 'create'])->name('employer.create');
-    Route::post('/store',[JobListingController::class, 'store'])->name('employer.store');
-    Route::get('/show/{id}',[JobListingController::class, 'show_job_listings'])->name('employer.show');
-    Route::get('/edit/{id}',[JobListingController::class, 'edit_form'])->name('employer.edit');
-    Route::post('/update/{id}', [JobListingController::class, 'update'])->name('employer.update');
-    Route::post('/delete/{id}', [JobListingController::class, 'delete'])->name('employer.delete');
-
+        Route::get('/create', [JobListingController::class, 'create'])->name('employer.create');
+        Route::post('/store',[JobListingController::class, 'store'])->name('employer.store');
+        Route::get('/show/{id}',[JobListingController::class, 'allListings'])->name('employer.show');
+        Route::get('/edit/{id}',[JobListingController::class, 'editForm'])->name('employer.edit');
+        Route::post('/update/{id}', [JobListingController::class, 'update'])->name('employer.update');
+        Route::post('/delete/{id}', [JobListingController::class, 'delete'])->name('employer.delete');
 
     // User Controller Routes
-    Route::get('/view/{id}',[UserController::class, 'showListings'])->name('job_seeker.show');
-    Route::get('/alllistings',[UserController::class, 'all_job_listings'])->name('job_seeker.job_listings');
-    Route::post('/filter-job-listings', [UserController::class, 'filterCategories'])->name('job_seeker.filter');
-    Route::get('/companies',[UserController::class, 'showAllCompanies'])->name('job_seeker.companies');
-
+    Route::group(['prefix' => 'user'], function(){
+        Route::get('/view/{id}',[UserController::class, 'showListings'])->name('job_seeker.show');
+        Route::get('/alllistings',[UserController::class, 'allListings'])->name('job_seeker.job_listings');
+        Route::post('/filter-job-listings', [UserController::class, 'filterCategories'])->name('job_seeker.filter');
+        Route::get('/companies',[UserController::class, 'showAllCompanies'])->name('job_seeker.companies');
+    });
 
     // Resume Controller Routes
-    Route::get('/resumes', [ResumeController::class, 'showUploadForm'])->name('resume.form');
-    Route::post('/upload', [ResumeController::class, 'upload'])->name('upload.resume');
-    Route::get('/download', [ResumeController::class, 'download'])->name('download.resume');
-    Route::post('/delete', [ResumeController::class, 'delete'])->name('delete.resume');
-    Route::get('/resume/show', [ResumeController::class, 'show'])->name('resume.show');
+    Route::group(['prefix' => 'resume'], function(){
+        Route::get('/resumes', [ResumeController::class, 'showUploadForm'])->name('resume.form');
+        Route::post('/upload', [ResumeController::class, 'upload'])->name('upload.resume');
+        Route::get('/download', [ResumeController::class, 'download'])->name('download.resume');
+        Route::post('/delete', [ResumeController::class, 'delete'])->name('delete.resume');
+        Route::get('/resume/show', [ResumeController::class, 'show'])->name('resume.show');
+    });
 
 });
 

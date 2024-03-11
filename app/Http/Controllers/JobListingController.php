@@ -19,6 +19,7 @@ class JobListingController extends Controller
     public function index(){
 
         $jobs = JobListing::with('categories')->where('user_id', auth()->user()->id)->paginate(7);
+        $categories = Category::all();
         return view('employer.joblisting', compact('jobs','categories'));
     }
 
@@ -72,10 +73,15 @@ class JobListingController extends Controller
      * @param  int $id The job listing ID.
      * @return \Illuminate\View\View
      */
-    public function show_job_listings($id)
+    public function allListings($id)
     {
-        $jobs = JobListing::findOrFail($id);
-        return view ('employer.actions.viewJobListing', ['job' => $jobs]);
+        try {
+            $jobs = JobListing::findOrFail($id);
+            return view ('employer.actions.viewJobListing', ['job' => $jobs]);
+        } catch (ModelNotFoundException $e) {
+            abort(404, 'User not found');
+        }
+
     }
 
     /**
@@ -84,12 +90,16 @@ class JobListingController extends Controller
      * @param  int $id The job listing ID.
      * @return \Illuminate\View\View
      */
-    public function edit_form($id)
+    public function editForm($id)
     {
-        $jobs = JobListing::findOrFail($id);
-        $categories = Category::all();
+        try {
+            $jobs = JobListing::findOrFail($id);
+            $categories = Category::all();
 
-        return view('employer.actions.editJobListings', compact('jobs', 'categories'));
+            return view('employer.actions.editJobListings', compact('jobs', 'categories'));
+        } catch (ModelNotFoundException $e) {
+            abort(404, 'User not found');
+        }
     }
 
     /**

@@ -58,7 +58,7 @@ class ResumeController extends Controller
             if (file_exists($filePath)) {
                 return response()->download($filePath);
             } else {
-                dd("File does not exist at path: " . $filePath);
+                return redirect()->back()->with("File does not exist at path: " . $filePath);
             }
         } else {
             return redirect()->back()->with('error', 'No resume uploaded yet.');

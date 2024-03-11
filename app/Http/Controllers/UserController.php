@@ -28,9 +28,16 @@ class UserController extends Controller
      */
     public function showListings($id)
     {
-        $job = JobListing::findOrFail($id);
-        $categories = $job->categories;
-        return view('job_seeker.actions.viewJobListing', compact('job', 'categories'));
+        try {
+            $job = JobListing::findOrFail($id);
+            $categories = $job->categories;
+            
+            return view('job_seeker.actions.viewJobListing', compact('job', 'categories'));
+        } catch (ModelNotFoundException $e) {
+            abort(404, 'User not found');
+        }
+        
+
     }
     
     /**
@@ -38,7 +45,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function all_job_listings()
+    public function allListings()
     {
         $jobs = JobListing::all();
         return view ('job_seeker.showAllListings', ['jobs' => $jobs]);
@@ -63,7 +70,7 @@ class UserController extends Controller
             $query->whereIn('id', $selectedCategories);
         })->get();
 
-        return view('job_seeker.searchListings', compact('jobs','categories'));
+        return view('job_seeker.dashboard', compact('jobs','categories'));
     }
 
     /**
