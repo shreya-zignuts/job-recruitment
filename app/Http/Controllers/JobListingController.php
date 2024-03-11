@@ -41,14 +41,14 @@ class JobListingController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'categories' => "required|array",
-            'company_name' => "required",
-            'title' => "required",
-            'description' => "required",
-            'requirements' => "required",
-            'location' => "required",
-            'salary' => "required|regex:/^\d{1,8}(\.\d{1,2})?$/",
-            'status' => 'required|in:active,closed',
+            'categories'    => "required|array",
+            'company_name'  => "required",
+            'title'         => "required",
+            'description'   => "required",
+            'requirements'  => "required",
+            'location'      => "required",
+            'salary'        => "required|regex:/^\d{1,8}(\.\d{1,2})?$/",
+            'status'        => 'required|in:active,closed',
         ]);
 
         $jobs = auth()->user()->jobListings()->create($request->only([
@@ -61,10 +61,6 @@ class JobListingController extends Controller
             'status'
 
         ]));
-        
-        // foreach ($request->categories as $category_id) {
-        //     $jobs->categories()->attach(['category_id' => $category_id]);
-        // }
         $jobs->categories()->attach($request->categories);
 
         return redirect()->route('employer.dashboard')->with('success', 'Job Listing successful');
@@ -76,7 +72,8 @@ class JobListingController extends Controller
      * @param  int $id The job listing ID.
      * @return \Illuminate\View\View
      */
-    public function show_job_listings($id){
+    public function show_job_listings($id)
+    {
         $jobs = JobListing::findOrFail($id);
         return view ('employer.actions.viewJobListing', ['job' => $jobs]);
     }
@@ -87,9 +84,11 @@ class JobListingController extends Controller
      * @param  int $id The job listing ID.
      * @return \Illuminate\View\View
      */
-    public function edit_form($id){
+    public function edit_form($id)
+    {
         $jobs = JobListing::findOrFail($id);
         $categories = Category::all();
+
         return view('employer.actions.editJobListings', compact('jobs', 'categories'));
     }
 
@@ -100,8 +99,8 @@ class JobListingController extends Controller
      * @param  int $id The job listing ID.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id){
-
+    public function update(Request $request, $id)
+    {
         $jobs = JobListing::findOrFail($id);
 
         $jobListing = $request->validate([
@@ -127,7 +126,8 @@ class JobListingController extends Controller
      * @param  int $id The job listing ID.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($id){
+    public function delete($id)
+    {
         $jobs = JobListing::findOrFail($id);
         if(!$jobs){
             return redirect()->route('employer.dashboard')->with('fail', 'Joblisting notfound');

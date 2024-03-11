@@ -28,7 +28,7 @@ class ResumeController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'resume' => 'required|mimes:pdf,jpg,png|max:6048', // PDF file, max 2MB
+            'resume' => 'required|mimes:pdf,jpg,png|max:6048', 
         ]);
 
         $user = Auth::user();
@@ -95,7 +95,6 @@ class ResumeController extends Controller
         $user = Auth::user();
 
         if ($user->resume) {
-            // Delete resume file and database entry
             Storage::delete($user->resume->path);
             $user->resume->delete();
 

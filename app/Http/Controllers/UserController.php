@@ -26,7 +26,8 @@ class UserController extends Controller
      * @param  int $id The ID of the job listing.
      * @return \Illuminate\View\View
      */
-    public function showListings($id){
+    public function showListings($id)
+    {
         $job = JobListing::findOrFail($id);
         $categories = $job->categories;
         return view('job_seeker.actions.viewJobListing', compact('job', 'categories'));
@@ -37,7 +38,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function all_job_listings(){
+    public function all_job_listings()
+    {
         $jobs = JobListing::all();
         return view ('job_seeker.showAllListings', ['jobs' => $jobs]);
     }
@@ -68,7 +70,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function showAllCompanies(){
+    public function showAllCompanies()
+    {
         $jobs = JobListing::paginate(15);
         return view('job_seeker.companies',compact('jobs'));
     }
@@ -78,7 +81,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function showResume(){
+    public function showResume()
+    {
         return view('job_seeker.resume');
     }
 }
