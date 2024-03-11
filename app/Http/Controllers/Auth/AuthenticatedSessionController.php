@@ -62,7 +62,7 @@ class AuthenticatedSessionController extends Controller
             }
         }
 
-        return redirect()->back()->withInput()->withErrors(['email' => 'email already exits.']);
+        return redirect()->back()->withInput()->withErrors(['email' => 'email belongs to another user.']);
 
     }
 

@@ -59,7 +59,8 @@
                                 class="bi bi-pencil-square"></i></a>
                     </td>
                     <td class="align-middle text-center" style="border: none;">
-                        <form action="{{ route('employer.delete', ['id' => $job->id]) }}" method="post">
+                        <form action="{{ route('employer.delete', ['id' => $job->id]) }}"
+                            class="align-middle text-center" method="post">
                             @csrf
                             <button onclick="return confirm('Are you sure you want to delete this task?')"
                                 class="align-middle text-center"><i class="bi bi-trash-fill"></i></button>
@@ -79,5 +80,15 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var successMessage = document.getElementById('success');
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+        }, 2000);
+    });
     </script>
 </x-app-layout>
