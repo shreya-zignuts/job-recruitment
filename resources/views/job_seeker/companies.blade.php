@@ -44,7 +44,6 @@
         </div>
         </div>
     </header>
-    <div class="container">
         <a href="{{ route('job_seeker.dashboard') }}">
             <div class="fs-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
@@ -55,7 +54,6 @@
                 </svg>
             </div>
         </a>
-    </div>
     <section>
         <div>
             <div class="container mt-3">
