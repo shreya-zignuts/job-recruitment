@@ -52,7 +52,7 @@
             <div class="col-md-4">
                 <form method="POST" action="{{ route('job_seeker.filter') }}">
                     @csrf
-                    <div class="form-group mb-3 card mt-3" style="width: 100%;">
+                    <div class="form-group card mt-3" style="width: 100%;">
                         <div class="card-header">
                             Select Categories
                         </div>
@@ -98,11 +98,12 @@
             </div>
         </div>
         @elseif(!$selectedCategories)
-        <div class="container my-5">
+        <hr class="mt-5">
+        <div class="container mt-5">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-body-secondary rounded-3" style="display: flex; justify-content: center;">
                 <li class="breadcrumb-item">
-                    <p class="link-body-emphasis fw-semibold text-decoration-none text-center p-3 mt-3">No Categories Selected</p>
+                    <p class="link-body-emphasis fw-semibold text-decoration-none text-center p-1 mt-3">No Categories Selected</p>
                 </li>
                 </ol>
             </nav>
