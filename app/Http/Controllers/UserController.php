@@ -17,7 +17,8 @@ class UserController extends Controller
     {  
         $jobs = JobListing::all();
         $categories = Category::all();
-        return view('job_seeker.dashboard',compact('jobs','categories'));
+        $selectedCategories = null;
+        return view('job_seeker.dashboard',compact('jobs','categories','selectedCategories'));
     }
 
     /**
@@ -69,7 +70,7 @@ class UserController extends Controller
             $query->whereIn('id', $selectedCategories);
         })->get();
 
-        return view('job_seeker.dashboard', compact('jobs','categories'));
+        return view('job_seeker.dashboard', compact('jobs','categories','selectedCategories'));
     }
 
     /**

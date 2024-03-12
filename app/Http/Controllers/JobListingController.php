@@ -113,14 +113,14 @@ class JobListingController extends Controller
         $jobs = JobListing::findOrFail($id);
 
         $jobListing = $request->validate([
-            'categories' => "required|array",
-            'company_name' => "required",
-            'title' => "required",
-            'description' => "required",
-            'requirements' => "required",
-            'location' => "required",
-            'salary' => "required|regex:/^\d{1,8}(\.\d{1,2})?$/",
-            'status' => 'required|in:active,closed',
+            'categories'    => "required|array",
+            'company_name'  => "required",
+            'title'         => "required",
+            'description'   => "required",
+            'requirements'  => "required",
+            'location'      => "required",
+            'salary'        => "required|regex:/^\d{1,8}(\.\d{1,2})?$/",
+            'status'        => 'required|in:active,closed',
         ]);
         $jobs->update($jobListing);
 
@@ -137,9 +137,9 @@ class JobListingController extends Controller
      */
     public function delete($id)
     {
-        $jobs = JobListing::findOrFail($id);
+        $jobs = JobListing::find($id);
         if(!$jobs){
-            return redirect()->route('employer.dashboard')->with('fail', 'Joblisting notfound');
+            return redirect()->route('employer.dashboard')->with('fail', 'Joblisting not found');
         }
         $jobs->delete();
         return redirect()->route('employer.dashboard')->with('success', 'Job Listing deleted successfully');

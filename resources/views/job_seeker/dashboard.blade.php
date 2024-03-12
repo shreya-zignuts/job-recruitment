@@ -1,8 +1,3 @@
-@if(session('fail'))
-    <div class="alert alert-danger">
-        {{ session('fail') }}
-    </div>
-@endif
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,6 +42,11 @@
         </div>
         </div>
     </header>
+    @if(session('fail'))
+    <div class="alert alert-danger">
+        {{ session('fail') }}
+    </div>
+    @endif
     <section>
         <div class="row justify-content-center mt-3">
             <div class="col-md-4">
@@ -71,6 +71,7 @@
                 </form>
             </div>
         </div>
+        @if($selectedCategories)
         <div>
             <h2 class="text-center h3 mt-4 bg-dark-subtle text-dark-emphasis text-black py-2">All Job Listings</h2>
             <div class="container text-center mt-5">
@@ -96,19 +97,30 @@
                 </div>
             </div>
         </div>
+        @elseif(!$selectedCategories)
+        <div class="container my-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-body-secondary rounded-3" style="display: flex; justify-content: center;">
+                <li class="breadcrumb-item">
+                    <p class="link-body-emphasis fw-semibold text-decoration-none text-center p-3 mt-3">No Categories Selected</p>
+                </li>
+                </ol>
+            </nav>
+        </div>
+        @endif
     </section>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
-            $(document).ready(function() {
-                // Check if the alert element exists
-                if ($('.alert').length) {
-                    // Fade out the alert after 2 seconds
-                    setTimeout(function() {
-                        $('.alert').fadeOut('slow');
-                    }, 2000); // 2000 milliseconds = 2 seconds
-                }
-            });
+    $(document).ready(function() {
+        // Check if the alert element exists
+        if ($('.alert').length) {
+            // Fade out the alert after 2 seconds
+            setTimeout(function() {
+                $('.alert').fadeOut('slow');
+            }, 2000); // 2000 milliseconds = 2 seconds
+        }
+    });
     $(document).ready(function() {
         // Select2 Multiple
         $('.select2-multiple').select2({
