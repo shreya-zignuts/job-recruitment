@@ -57,6 +57,7 @@
     <section>
         <div>
             <div class="container mt-3">
+                @if($jobs->isNotEmpty())
                 <table class="table table-bordered border-3 border-dark mt-3 text-center">
                     <thead class="table-secondary border-dark">
                         <tr>
@@ -79,6 +80,21 @@
                         @endforeach
                     </tbody>
                 </table>
+                @else<table class="table table-bordered border-3 border-dark mt-3 text-center">
+                    <thead class="table-secondary border-dark">
+                        <tr>
+                            <th scope="col">Company Names</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">More</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">No data available</td>
+                        </tr>
+                    </tbody>
+                </table>
+                @endif
                 <div class="row justify-content-center">
                     <div class="col-md-4">
                         {{ $jobs->links('pagination::bootstrap-5') }}

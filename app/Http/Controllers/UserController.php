@@ -65,7 +65,7 @@ class UserController extends Controller
 
         $selectedCategories = $request->categories;
         $categories = Category::all();
-
+        
         $jobs = JobListing::whereHas('categories', function ($query) use ($selectedCategories) {
             $query->whereIn('id', $selectedCategories);
         })->get();

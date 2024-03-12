@@ -51,6 +51,7 @@
                 </div>
             </a>
             <h3 class="text-center h3 mt-3 p-2 bg-dark-subtle text-dark-emphasis">All Job Listings</h3>
+            @if($jobs->isNotEmpty())
             <div class="container text-center mt-5">
                 <div class="row">
                     @foreach ($jobs as $job)
@@ -69,6 +70,17 @@
                     @endforeach
                 </div>
             </div>
+            @else
+                <div class="container mt-5">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-body-secondary rounded-3" style="display: flex; justify-content: center;">
+                        <li class="breadcrumb-item">
+                            <p class="link-body-emphasis fw-semibold text-decoration-none text-center p-1 mt-3">No data available</p>
+                        </li>
+                        </ol>
+                    </nav>
+                </div>
+            @ENDIF
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">

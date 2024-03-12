@@ -44,15 +44,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}',[JobListingController::class, 'editForm'])->name('employer.edit');
         Route::post('/update/{id}', [JobListingController::class, 'update'])->name('employer.update');
         Route::post('/delete/{id}', [JobListingController::class, 'delete'])->name('employer.delete');
+        Route::get('/showMail', [JobListingController::class, 'showMail'])->name('resume.mail');
+        Route::post('/send_email/{id}', [JobListingController::class, 'sendEmail'])->name('job.sendMail');
+
     });
 
     // User Controller Routes
     Route::group(['prefix' => 'user'], function(){
         Route::get('/view/{id}',[UserController::class, 'showListings'])->name('job_seeker.show');
         Route::get('/alllistings',[UserController::class, 'allListings'])->name('job_seeker.job_listings');
-        Route::post('/filterJobListings', [UserController::class, 'filterCategories'])->name('job_seeker.filter');
         Route::get('/companies',[UserController::class, 'showAllCompanies'])->name('job_seeker.companies');
     });
+    Route::post('/job_seeker/dashboard', [UserController::class, 'filterCategories'])->name('job_seeker.filter');
 
     // Resume Controller Routes
     Route::group(['prefix' => 'resume'], function(){
@@ -60,12 +63,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/upload', [ResumeController::class, 'upload'])->name('upload.resume');
         Route::get('/download', [ResumeController::class, 'download'])->name('download.resume');
         Route::post('/delete', [ResumeController::class, 'delete'])->name('delete.resume');
-        Route::get('/resume/show', [ResumeController::class, 'show'])->name('resume.show');
+        Route::get('/show', [ResumeController::class, 'show'])->name('resume.show');
+
     });
 
     Route::group(['prefix' => 'category'], function(){
         Route::get('/categorySelection', [CategoryController::class, 'showCategorySelection'])->name('category.job_listings');
-        Route::post('/categoryJobs', [CategoryController::class, 'showJobListings'])->name('categorY.show');
+        Route::post('/categoryJobs', [CategoryController::class, 'showJobListings'])->name('category.show');
     });
 
 });

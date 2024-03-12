@@ -60,7 +60,7 @@
                             <select class="select2-multiple form-control mt-3 text-center" name="categories[]"
                                 multiple="multiple" id="select2Multiple" style="width: 100%;">
                                 @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ is_array($selectedCategories) && in_array($category->id, $selectedCategories) ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -90,11 +90,23 @@
                     </div>
                     @endforeach
                 </div>
+                @if($jobs->isNotEmpty())
                 <div class="row">
                     <div class="col-md-12">
                         <a href="{{ route('job_seeker.job_listings') }}" class="btn btn-dark">View All Job Listings</a>
                     </div>
                 </div>
+                @else
+                <div class="container mt-5">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-body-secondary rounded-3" style="display: flex; justify-content: center;">
+                        <li class="breadcrumb-item">
+                            <p class="link-body-emphasis fw-semibold text-decoration-none text-center p-1 mt-3">No data available</p>
+                        </li>
+                        </ol>
+                    </nav>
+                </div>
+                @endif
             </div>
         </div>
         @elseif(!$selectedCategories)

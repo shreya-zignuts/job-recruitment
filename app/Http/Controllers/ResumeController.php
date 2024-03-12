@@ -105,4 +105,5 @@ class ResumeController extends Controller
             return redirect()->back()->with('error', 'No resume uploaded yet.');
         }
     }
+
 }

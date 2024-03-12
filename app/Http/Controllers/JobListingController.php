@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\JobListing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class JobListingController extends Controller
 {
@@ -150,6 +151,28 @@ class JobListingController extends Controller
         }
         $jobs->delete();
         return redirect()->route('employer.dashboard')->with('success', 'Job Listing deleted successfully');
+    }
+
+    public function showMail(){
+        return view('job_seeker.sendMail');
+    }
+
+    public function sendEmailWithResume(Request $request, $id)
+    {
+        $Id = $request->input('job_listing_id');
+        $resumePath = $request->input('resume');
+        
+        $employerEmail = '';
+
+        if ($user->role === 'employer') {
+            $employerEmail = $user->email;
+        } else {
+            return redirect()->route('resume.mail')->with('fail','Role not exists');
+        }
+
+        Mail::to($employerEmail)->send(new JobApplicationMail($message, $resumePath));
+
+        return redirect()->back()->with('success', 'Email sent to employer with resume attached.');
     }
 
 }

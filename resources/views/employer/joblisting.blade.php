@@ -21,9 +21,22 @@
             </div>
         </div>
         @if ($jobs->isEmpty())
-            <div class="alert alert-dark mt-3" role="alert">
-                No job listings available.
-            </div>
+        <table class="table table-bordered border-3 border-dark mt-3 text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Categories</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" colspan="3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">Data not available</td>
+                    </tr>
+                </tbody>
+        </table>
         @else
             <table class="table table-bordered border-3 border-dark mt-3 text-center">
                 <thead class="table-dark">

@@ -12,7 +12,7 @@ class CategoryController extends Controller
     protected $JobListingController;
 
     public function showCategorySelection()
-    {
+    {   
         $categories = Category::all();
         $jobListings = collect();
         $selectedCategory = null;
@@ -21,6 +21,7 @@ class CategoryController extends Controller
 
     public function showJobListings(Request $request)
     {
+        
         $selectedCategoryIds = $request->input('categories', []);
         
         $jobListings = JobListing::whereHas('categories', function ($query) use ($selectedCategoryIds) {
