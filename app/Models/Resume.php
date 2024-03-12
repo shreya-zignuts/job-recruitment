@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Resume extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['filename', 'path'];
+    protected $fillable = ['filename', 'path','created_by','updated_by'];
 
     public function user() {
         return $this->belongsTo(User::class);

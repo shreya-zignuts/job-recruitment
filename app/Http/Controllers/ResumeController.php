@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Resume;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,10 +36,11 @@ class ResumeController extends Controller
         $resumeFile = $request->file('resume');
         $resumeFilename = $resumeFile->getClientOriginalName();
         $resumePath = $request->file('resume')->store('public/resumes');
-
+        
         $user->resume()->create([
             'filename' => $resumeFilename,
             'path' => $resumePath,
+            'created_by' => $user->id,
         ]);
 
         return redirect()->back()->with('success', 'Resume uploaded successfully!');

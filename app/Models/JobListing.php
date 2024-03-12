@@ -12,7 +12,7 @@ class JobListing extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['company_name', 'title', 'description', 'requirements', 'location', 'salary', 'status', 'category_id'];
+    protected $fillable = ['company_name', 'title', 'description', 'requirements', 'location', 'salary', 'status', 'category_id','created_by','updated_by'];
 
     public function user() {
         return $this->belongsTo(User::class);

@@ -40,7 +40,7 @@ class JobListingController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request){
-
+        
         $request->validate([
             'categories'    => "required|array",
             'company_name'  => "required",
@@ -49,7 +49,7 @@ class JobListingController extends Controller
             'requirements'  => "required",
             'location'      => "required",
             'salary'        => "required|regex:/^\d{1,8}(\.\d{1,2})?$/",
-            'status'        => 'required|in:active,closed',
+            'status'        => "required|in:active,closed",
         ]);
 
         $jobs = auth()->user()->jobListings()->create($request->only([
@@ -59,9 +59,10 @@ class JobListingController extends Controller
             'requirements',
             'location',
             'salary',
-            'status'
-
-        ]));
+            'status',
+            ]) + ['created_by' => auth()->user()->id]
+        );
+         
         $jobs->categories()->attach($request->categories);
 
         return redirect()->route('employer.dashboard')->with('success', 'Job Listing successful');
@@ -110,7 +111,10 @@ class JobListingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $jobs = JobListing::findOrFail($id);
+        $jobs = JobListing::find($id);
+        if(!$jobs) {
+            return redirect()->route('employer.dashboard')->with('fail','Data not found') ;
+        }
 
         $jobListing = $request->validate([
             'categories'    => "required|array",
@@ -122,6 +126,9 @@ class JobListingController extends Controller
             'salary'        => "required|regex:/^\d{1,8}(\.\d{1,2})?$/",
             'status'        => 'required|in:active,closed',
         ]);
+
+        $jobListing['updated_by'] = auth()->user()->id;
+
         $jobs->update($jobListing);
 
         $jobs->categories()->sync($request->categories);
