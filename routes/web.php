@@ -37,12 +37,14 @@ Route::middleware('auth')->group(function () {
 
 
     //Job Listing Routes
+    Route::group(['prefix' => 'employe'], function(){
         Route::get('/create', [JobListingController::class, 'create'])->name('employer.create');
         Route::post('/store',[JobListingController::class, 'store'])->name('employer.store');
         Route::get('/show/{id}',[JobListingController::class, 'allListings'])->name('employer.show');
         Route::get('/edit/{id}',[JobListingController::class, 'editForm'])->name('employer.edit');
         Route::post('/update/{id}', [JobListingController::class, 'update'])->name('employer.update');
         Route::post('/delete/{id}', [JobListingController::class, 'delete'])->name('employer.delete');
+    });
 
     // User Controller Routes
     Route::group(['prefix' => 'user'], function(){
