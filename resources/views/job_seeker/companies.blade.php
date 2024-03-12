@@ -14,8 +14,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
-</head>
-
 <body>
     <header class="p-3 text-bg-dark">
         <div class="container">
@@ -108,3 +106,6 @@
                 </div>
             </div>
     </section>
+    </body>
+
+</html>

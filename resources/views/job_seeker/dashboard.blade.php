@@ -1,3 +1,8 @@
+@if(session('fail'))
+    <div class="alert alert-danger">
+        {{ session('fail') }}
+    </div>
+@endif
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +16,6 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-</head>
-
 </head>
 
 <body>
@@ -97,6 +100,15 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
+            $(document).ready(function() {
+                // Check if the alert element exists
+                if ($('.alert').length) {
+                    // Fade out the alert after 2 seconds
+                    setTimeout(function() {
+                        $('.alert').fadeOut('slow');
+                    }, 2000); // 2000 milliseconds = 2 seconds
+                }
+            });
     $(document).ready(function() {
         // Select2 Multiple
         $('.select2-multiple').select2({

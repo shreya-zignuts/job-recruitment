@@ -28,15 +28,14 @@ class UserController extends Controller
      */
     public function showListings($id)
     {
-        try {
-            $job = JobListing::findOrFail($id);
-            $categories = $job->categories;
-            
-            return view('job_seeker.actions.viewJobListing', compact('job', 'categories'));
-        } catch (ModelNotFoundException $e) {
-            abort(404, 'User not found');
+        $job = JobListing::find($id);
+
+        if(!$job) {
+            return redirect()->route('job_seeker.dashboard')->with('fail','Data not found') ;
         }
         
+        $categories = $job->categories;
+        return view('job_seeker.actions.viewJobListing', compact('job', 'categories'));
 
     }
     

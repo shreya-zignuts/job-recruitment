@@ -13,8 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
-</head>
-
 <body>
     <header class="p-3 text-bg-dark">
         <div class="container">
@@ -44,6 +42,13 @@
         </div>
         </div>
     </header>
+    <div class="container mt-4">
+        @if(session('fail'))
+        <div class="alert alert-danger">
+            {{ session('fail') }}
+        </div>
+        @endif
+    </div>
     <div>
         <a href="{{ route('job_seeker.dashboard') }}">
             <div class="fs-4 mb-3 mt-2 ml-2">
@@ -130,4 +135,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -75,12 +75,11 @@ class JobListingController extends Controller
      */
     public function allListings($id)
     {
-        try {
-            $jobs = JobListing::findOrFail($id);
-            return view ('employer.actions.viewJobListing', ['job' => $jobs]);
-        } catch (ModelNotFoundException $e) {
-            abort(404, 'User not found');
+        $jobs = JobListing::find($id);
+        if(!$jobs) {
+            return redirect()->route('employer.dashboard')->with('fail','Data not found') ;
         }
+        return view ('employer.actions.viewJobListing', ['job' => $jobs]);
 
     }
 
@@ -92,14 +91,14 @@ class JobListingController extends Controller
      */
     public function editForm($id)
     {
-        try {
-            $jobs = JobListing::findOrFail($id);
-            $categories = Category::all();
+            $jobs = JobListing::find($id);
 
+            if(!$jobs) {
+                return redirect()->route('employer.dashboard')->with('fail','Data not found') ;
+            }
+            
+            $categories = Category::all();
             return view('employer.actions.editJobListings', compact('jobs', 'categories'));
-        } catch (ModelNotFoundException $e) {
-            abort(404, 'User not found');
-        }
     }
 
     /**

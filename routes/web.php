@@ -61,6 +61,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/resume/show', [ResumeController::class, 'show'])->name('resume.show');
     });
 
+    Route::group(['prefix' => 'category'], function(){
+        Route::get('/categorySelection', [CategoryController::class, 'showCategorySelection'])->name('category.job_listings');
+        Route::post('/categoryJobs', [CategoryController::class, 'showJobListings'])->name('categorY.show');
+    });
+
 });
 
 

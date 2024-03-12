@@ -16,6 +16,11 @@
                         {{ __('Job Listing') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-4 sm:flex">
+                    <x-nav-link :href="route('category.job_listings')" :active="request()->routeIs('dashboard')">
+                        {{ __('Category') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
