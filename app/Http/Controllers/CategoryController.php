@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\JobListing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -21,10 +22,10 @@ class CategoryController extends Controller
 
     public function showJobListings(Request $request)
     {
-        
+        $user = Auth::user();
         $selectedCategoryIds = $request->input('categories', []);
         
-        $jobListings = JobListing::whereHas('categories', function ($query) use ($selectedCategoryIds) {
+        $jobListings = $user->jobListings()->whereHas('categories', function ($query) use ($selectedCategoryIds) {
             $query->whereIn('category_id', $selectedCategoryIds);
         })->get();
 
