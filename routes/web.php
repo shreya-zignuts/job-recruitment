@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'user'], function(){
         Route::get('/view/{id}',[UserController::class, 'showListings'])->name('job_seeker.show');
         Route::get('/alllistings',[UserController::class, 'allListings'])->name('job_seeker.job_listings');
-        Route::post('/filter-job-listings', [UserController::class, 'filterCategories'])->name('job_seeker.filter');
+        Route::post('/filterJobListings', [UserController::class, 'filterCategories'])->name('job_seeker.filter');
         Route::get('/companies',[UserController::class, 'showAllCompanies'])->name('job_seeker.companies');
     });
 
