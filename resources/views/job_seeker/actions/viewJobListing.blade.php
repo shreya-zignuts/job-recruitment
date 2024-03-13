@@ -40,7 +40,6 @@
                 </form>
             </div>
         </div>
-        </div>
     </header>
     <div class="container mt-4">
         @if(session('fail'))
@@ -50,7 +49,7 @@
         @endif
     </div>
     <div>
-        <a href="{{ route('job_seeker.dashboard') }}">
+        <a href="{{ URL::previous() }}">
             <div class="fs-4 ml-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                     class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
@@ -60,83 +59,84 @@
                 </svg>
             </div>
         </a>
-    </div>
-    <div>
-        <div class="container text-center">
+        <div>
+            @if($job->status == 'active')
+            <div class="container text-end">
                 <a href="{{ route('resume.mail') }}"><button class="btn btn-dark p-2 mt-1">Apply Now</button></a>
             </div>
-        <div class="container text-center outline outline-offset-4 w-1/3 sm:rounded-lg p-6 mt-3">
-            <div class="mt-1 block w-sm p-2 bg-gray-500 rounded-lg">
-                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold text-center justify-center"
-                    aria-current="true">Categories
-                    <div class="list-group-item mt-2 font-medium text-black">
-                        @foreach($categories as $category)
-                        <span class="underline underline-offset-4">{{ $category->name }}</span>
-                        @if (!$loop->last)
-                        ,
-                        @endif
-                        @endforeach
+            @endif
+            <div class="container mt-3">
+                <div class="mt-3 mb-3">
+                    <h3 class="text-center h3 m-0 ">Job Details</h5>
+                </div>
+                <div class="card p-3 border border-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mt-3 text-center">
+                                <div class="card-header">Categories</div>
+                                <div class="card-body">
+                                    @foreach($job->categories as $category)
+                                    <span class="badge bg-secondary">{{ $category->name }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <div class="col-md-6 text-center mb-3">
+                                <div class="card mt-3">
+                                    <div class="card-header">Company Name</div>
+                                    <div class="card-body ">
+                                        <span class="card-title p-2 text-lg">{{ $job->company_name }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Job Title</div>
+                                <div class="card-body">{{ $job->title }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Description</div>
+                                <div class="card-body">{{ $job->description }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Requirements</div>
+                                <div class="card-body">{{ $job->requirements }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Location</div>
+                                <div class="card-body">{{ $job->location }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Salary</div>
+                                <div class="card-body">{{ $job->salary }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header">Status</div>
+                                <div class="card-body">{{ $job->status }}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-2 block w-sm p-2 rounded-lg">
-                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold"
-                    aria-current="true">Company Name
-                    <div
-                        class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">
-                        {{ $job->company_name }}</div>
-                </div>
-            </div>
-            <div class="mt-2 block justify-end w-sm p-2 bg-gray-500 rounded-lg">
-                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold"
-                    aria-current="true">Job Title
-                    <div
-                        class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">
-                        {{ $job->title }}</div>
-                </div>
-            </div>
-            <div class="mt-2 block w-sm p-2 bg-gray-500 rounded-lg">
-                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold"
-                    aria-current="true">Description
-                    <div
-                        class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">
-                        {{ $job->description }}</div>
-                </div>
-            </div>
-            <div class="mt-2 w-sm p-2 bg-gray-500 rounded-lg">
-                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold"
-                    aria-current="true">Requirements
-                    <div
-                        class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">
-                        {{ $job->requirements }}</div>
-                </div>
-            </div>
-            <div class="mt-2 block w-sm p-2 bg-gray-500 rounded-lg">
-                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold"
-                    aria-current="true">Location
-                    <div
-                        class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">
-                        {{ $job->location }}</div>
-                </div>
-            </div>
-            <div class="mt-2 w-sm p-2 bg-gray-500 rounded-lg">
-                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold"
-                    aria-current="true">Salary
-                    <div
-                        class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">
-                        {{ $job->salary }}</div>
-                </div>
-            </div>
-            <div class="mt-2 w-sm p-2 bg-gray-500 rounded-lg">
-                <div class="list-group-item list-group-item-dark p-4 text-xl text-black font-semibold"
-                    aria-current="true">Status
-                    <div
-                        class="list-group-item mt-2 font-medium text-black underline decoration-double underline-offset-4">
-                        {{ $job->status }}</div>
-                </div>
-            </div>
         </div>
-    </div>
 </body>
 
 </html>
