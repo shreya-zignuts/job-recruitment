@@ -13,12 +13,16 @@ class JobApplicationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $resumePath;
+    public $message;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($message, $resumePath)
     {
-        //
+        $this->message = $message;
+        $this->resumePath = $resumePath;
     }
 
     /**
@@ -29,6 +33,11 @@ class JobApplicationMail extends Mailable
         return new Envelope(
             subject: 'Job Application Mail',
         );
+    }
+
+    public function build()
+    {
+        return $this->view('job_seeker.sendMail');
     }
 
     /**

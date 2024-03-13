@@ -153,14 +153,17 @@ class JobListingController extends Controller
         return redirect()->route('employer.dashboard')->with('success', 'Job Listing deleted successfully');
     }
 
-    public function showMail(){
-        return view('job_seeker.sendMail');
+    public function showMail(Request $request){
+        $resumePath = $request->resume;
+        return view('job_seeker.sendMail')->with('resumePath',$resumePath);
     }
 
-    public function sendEmailWithResume(Request $request, $id)
+    public function sendEmailWithResume(Request $request)
     {
-        $Id = $request->input('job_listing_id');
-        $resumePath = $request->input('resume');
+        $user = Auth::user();
+
+        $resumePath = $request->resume;
+        $message = $request->input('message');
         
         $employerEmail = '';
 
@@ -173,6 +176,7 @@ class JobListingController extends Controller
         Mail::to($employerEmail)->send(new JobApplicationMail($message, $resumePath));
 
         return redirect()->back()->with('success', 'Email sent to employer with resume attached.');
+
     }
 
 }

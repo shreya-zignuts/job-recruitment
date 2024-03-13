@@ -9,8 +9,6 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -40,25 +38,37 @@
                 </form>
             </div>
         </div>
-        </div>
     </header>
     <section>
         <div class="container mt-5 d-flex justify-content-center align-center">
-                <div class="card" style="width: 50rem; height: 30rem">
-                    <div class="card-body">
-                        <form action="{{ route('jo') }}" method="post">
-                            <h5 class="card-title bg-secondary p-2 mt-4 text-white text-center">Send Mail </h5>
-                            <p class="card-text mt-5">
-                                <label for="exampleFormControlTextarea1">Enter Message</label>
-                                <textarea class="form-control mt-3" id="exampleFormControlTextarea1" rows="3"></textarea></p>
+            <div class="card" style="width: 50rem; height: auto">
+                <div class="card-body">
+                    <form action="{{ route('job.sendMail')}}" method="post">
+                        <h5 class="card-title bg-secondary p-2 mt-4 text-white text-center">Send Mail </h5>
+                        <p class="card-text mt-5">
+                            <label for="exampleFormControlTextarea1">Enter Message</label>
+                            <textarea class="form-control mt-3" name="message" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </p>
+                        @if(Auth::user()->resume)
                             <p class="card-text mt-4">
-                                <label for="exampleFormControlTextarea1">Resume Path</label>
-                                <input class="form-control text-center mt-3" type="text"></p>
-                                <div class="form-group mt-5 text-center">
-                                    <button>Send Mail</button>
-                                </div>
-                            </form>
+                                <label for="resume">Resume Path</label>
+                                <span>{{ basename(Auth::user()->resume->filename) }}</span><br>
+                                <a href="{{ route('download.resume') }}" target="_blank">Download Resume</a>
+                            </p>
+                        @else
+                            <p class="card-text mt-4">
+                                <label for="resume">Upload Resume</label>
+                                <input class="form-control text-center mt-3" type="file" id="resume" name="resume">
+                            </p>
+                        @endif
+                            <div class="form-group mt-5 text-center">
+                            <button type="submit" class="btn btn-primary">Send Mail</button>
                         </div>
+                    </form>
                 </div>
+            </div>
         </div>
     </section>
+</body>
+
+</html>
