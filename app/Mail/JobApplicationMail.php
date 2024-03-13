@@ -2,27 +2,33 @@
 
 namespace App\Mail;
 
+use App\Models\JobListing;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class JobApplicationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $resumePath;
-    public $message;
+    public $mailMessage;
+    public $userName;
+    public $employerName;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($message, $resumePath)
+    public function __construct($mailMessage, $resumePath, $userName, $employerName)
     {
-        $this->message = $message;
+        $this->mailMessage = $mailMessage;
         $this->resumePath = $resumePath;
+        $this->userName = $userName;
+        $this->employerName = $employerName;
+
     }
 
     /**
@@ -36,21 +42,12 @@ class JobApplicationMail extends Mailable
     }
 
     public function build()
-    {
-        return $this->view('job_seeker.sendMail');
+    { 
+        $resumeName = basename($this->resumePath);
+        return $this->view('job_seeker.composeMail')
+                ->attach(storage_path('app/public/resumes/' . $resumeName), ['as' => $resumeName]);
     }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
-
-    /**
+    /*
      * Get the attachments for the message.
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>

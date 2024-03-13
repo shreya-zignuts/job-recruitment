@@ -44,8 +44,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}',[JobListingController::class, 'editForm'])->name('employer.edit');
         Route::post('/update/{id}', [JobListingController::class, 'update'])->name('employer.update');
         Route::post('/delete/{id}', [JobListingController::class, 'delete'])->name('employer.delete');
-        Route::get('/showMail', [JobListingController::class, 'showMail'])->name('resume.mail');
-        Route::post('/sendEmail', [JobListingController::class, 'sendEmail'])->name('job.sendMail');
+        Route::get('/showMail/{id}', [JobListingController::class, 'showMail'])->name('resume.mail');
+        Route::post('/sendEmail/{id}', [JobListingController::class, 'sendEmail'])->name('job.sendMail');
 
     });
 

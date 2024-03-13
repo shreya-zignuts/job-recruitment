@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\User;
 use App\Models\Category;
 use App\Models\JobListing;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Auth;
+use App\Mail\JobApplicationMail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class JobListingController extends Controller
@@ -153,30 +155,36 @@ class JobListingController extends Controller
         return redirect()->route('employer.dashboard')->with('success', 'Job Listing deleted successfully');
     }
 
-    public function showMail(Request $request){
-        $resumePath = $request->resume;
-        return view('job_seeker.sendMail')->with('resumePath',$resumePath);
+    public function showMail(Request $request, $id) {
+        $job = JobListing::find($id);
+        if (!$job) {
+            return redirect()->route('employer.dashboard')->with('fail', 'Job listing not found');
+        }
+        return view('job_seeker.sendMail', ['job' => $job]);
     }
 
-    public function sendEmailWithResume(Request $request)
+    public function sendEmail(Request $request, $id)
     {
-        $user = Auth::user();
+        $job = JobListing::find($id);
 
-        $resumePath = $request->resume;
-        $message = $request->input('message');
-        
-        $employerEmail = '';
-
-        if ($user->role === 'employer') {
-            $employerEmail = $user->email;
-        } else {
-            return redirect()->route('resume.mail')->with('fail','Role not exists');
+        if(!$job){
+            return redirect()->route('employer.dashboard')->with('fail', 'Joblisting not found');
         }
 
-        Mail::to($employerEmail)->send(new JobApplicationMail($message, $resumePath));
+        $resumePath = Auth::user()->resume->path;
+        if(!$resumePath){
+            return redirect()->back()->with('fail','Resume not found');
+        }
+        $userName = Auth::user()->name;
+        
+        $mailMessage = $request->mailMessage;
+
+        $employer = User::where('role', 'employer')->findOrFail($job->user_id);
+        $employerName = $employer->name;
+        $employerEmail = $employer->email;
+
+        Mail::to($employerEmail)->send(new JobApplicationMail($mailMessage, $resumePath, $userName, $employerName));
 
         return redirect()->back()->with('success', 'Email sent to employer with resume attached.');
-
     }
-
 }

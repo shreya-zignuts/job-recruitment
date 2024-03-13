@@ -39,29 +39,41 @@
             </div>
         </div>
     </header>
+    @if(session('success'))
+        <div class="alert alert-success text-center" role="alert" id="success">
+            {{ session('success') }}
+        </div>
+    @endif
     <section>
         <div class="container mt-5 d-flex justify-content-center align-center">
-            <div class="card" style="width: 50rem; height: auto">
+            <div class="card border border-5 border-dark" style="width: 50rem; height: auto">
                 <div class="card-body">
-                    <form action="{{ route('job.sendMail')}}" method="post">
+                    <form action="{{ route('job.sendMail',['id'=> $job->id])}}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <h5 class="card-title bg-secondary p-2 mt-4 text-white text-center">Send Mail </h5>
                         <p class="card-text mt-5">
                             <label for="exampleFormControlTextarea1">Enter Message</label>
-                            <textarea class="form-control mt-3" name="message" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea class="form-control mt-2" id="mailMessage" name="mailMessage" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </p>
                         @if(Auth::user()->resume)
-                            <p class="card-text mt-4">
-                                <label for="resume">Resume Path</label>
-                                <span>{{ basename(Auth::user()->resume->filename) }}</span><br>
-                                <a href="{{ route('download.resume') }}" target="_blank">Download Resume</a>
+                            <p class="card-text mt-4 text-center">
+                            <div class="card mt-4">
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">Uploaded Resume</h4>
+                                    <div class="container text-center">
+                                        <p class="card-text">File Name: {{ basename(Auth::user()->resume->filename) }}</p>
+                                        <a href="{{ route('resume.show') }}" class="btn btn-secondary">Review Resume</a>
+                                    </div>
+                                </div>
+                            </div>
+
                             </p>
                         @else
-                            <p class="card-text mt-4">
-                                <label for="resume">Upload Resume</label>
-                                <input class="form-control text-center mt-3" type="file" id="resume" name="resume">
-                            </p>
+                        <div class="alert alert-primary text-center" role="alert">
+                           <a href="{{ route('resume.form') }}">Click to Upload Resume</a>
+                        </div>
                         @endif
-                            <div class="form-group mt-5 text-center">
+                            <div class="form-group mt-5 mb-3 text-center">
                             <button type="submit" class="btn btn-primary">Send Mail</button>
                         </div>
                     </form>

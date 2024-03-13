@@ -62,7 +62,7 @@
         <div>
             @if($job->status == 'active')
             <div class="container text-end">
-                <a href="{{ route('resume.mail') }}"><button class="btn btn-dark p-2 mt-1">Apply Now</button></a>
+                <a href="{{ route('resume.mail',['id' => $job->id]) }}"><button class="btn btn-dark p-2 mt-1">Apply Now</button></a>
             </div>
             @endif
             <div class="container mt-3">
