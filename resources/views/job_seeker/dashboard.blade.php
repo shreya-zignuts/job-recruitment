@@ -82,9 +82,10 @@
                 </form>
             </div>
         </div>
+        <hr class="mt-5">
         @if($selectedCategories)
         <div>
-            <h2 class="text-center h3 mt-4 bg-dark-subtle text-dark-emphasis text-black py-2">All Job Listings</h2>
+            <h2 class="text-center h3 bg-dark-subtle text-dark-emphasis text-black py-2">All Job Listings</h2>
             <div class="container text-center mt-5">
                 <div class="row">
                     @foreach ($jobs->take(4) as $job)
@@ -123,7 +124,6 @@
             </div>
         </div>
         @elseif(!$selectedCategories)
-        <hr class="mt-5">
         <div class="container mt-5">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-body-secondary rounded-3" style="display: flex; justify-content: center;">

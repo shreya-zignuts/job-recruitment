@@ -4,15 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Send Mail</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-    <header class="p-3 text-bg-dark">
+    <header class="p-3 bg-dark text-white">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -25,8 +23,7 @@
                     <li><a href="/job_seeker/dashboard" class="nav-link px-2 text-white">Home</a></li>
                     <li><a href="{{ route('job_seeker.companies') }}" class="nav-link px-2 text-white">Companies</a>
                     </li>
-                    <li><a href="{{ route('job_seeker.job_listings') }}" class="nav-link px-2 text-white">Job
-                            Listings</a></li>
+                    <li><a href="{{ route('job_seeker.job_listings') }}" class="nav-link px-2 text-white">Job Listings</a></li>
                     <li><a href="{{ route('resume.form') }}" class="nav-link px-2 text-white">Resume</a></li>
                 </ul>
                 <form method="POST" action="{{ route('logout') }}">
@@ -39,70 +36,63 @@
             </div>
         </div>
     </header>
-    @if(session('success'))
-        <div class="alert alert-success text-center" role="alert" id="success">
-            {{ session('success') }}
-        </div>
-        @elseif(session('fail'))
-        <div class="alert alert-danger text-center" role="alert" id="fail">
-            {{ session('fail') }}
-        </div>
-        @endif
-    <section>
-    <h2 class="card-title h2 mt-5 text-center">Send Mail </h2>
-        <div class="container mt-3 d-flex justify-content-center align-center">
-            <div class="card border border-5 border-dark" style="width: 50rem; height: auto">
-                <div class="card-body">
-                    <form action="{{ route('job.sendMail',['id'=> $job->id])}}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <p class="card-text mt-5">
-                            <label for="exampleFormControlTextarea1" class="h5">Message</label>
-                            <textarea class="form-control" id="mailMessage" name="mailMessage" id="exampleFormControlTextarea1" rows="3" placeholder="Enter the message you want to employer.."></textarea>
-                        </p>
-                        @if(Auth::user()->resume)
-                            <p class="card-text mt-4 text-center">
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <h4 class="card-title text-center">Uploaded Resume : {{ basename(Auth::user()->resume->filename) }}</h4>
-                                    <div class="container text-center mt-3">
-                                        <a href="{{ route('resume.show') }}" class="btn btn-secondary">Review Resume</a>
-                                    </div>
-                                </div>
-                            </div>
+    <section class="mt-5">
+        <div class="container border border-4 bg-secondary">
+            <div class="row justify-content-center py-5">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header bg-black text-white">Compose Mail</div>
 
-                            </p>
-                        @else
-                        <div class="alert alert-secondary text-center" role="alert">
-                           <a href="{{ route('resume.form') }}">Click to Upload Resume</a>
+                        <div class="card-body">
+                            @if(session('success'))
+                                <div class="alert alert-success text-center" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @elseif(session('fail'))
+                                <div class="alert alert-danger text-center" role="alert">
+                                    {{ session('fail') }}
+                                </div>
+                            @endif
+
+                            <form action="{{ route('job.sendMail',['id'=> $job->id])}}" method="post"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="mailMessage" class="form-label">Message</label>
+                                    <textarea class="form-control" id="mailMessage" name="mailMessage" rows="5"
+                                        placeholder="Enter the message you want to send to the employer.."></textarea>
+                                </div>
+
+                                @if(Auth::user()->resume)
+                                    <div class="text-center p-3">
+                                        Uploaded Resume : {{ basename(Auth::user()->resume->filename) }}
+                                        <br>
+                                        <p class="mt-3"><a href="{{ route('resume.show') }}">Review Resume</a></p>
+                                    </div>
+                                @else
+                                    <div class="alert alert-warning text-center" role="alert">
+                                        You have not uploaded your resume yet.
+                                        <br>
+                                        <a href="{{ route('resume.form') }}" class="btn btn-warning mt-2">Upload
+                                            Resume</a>
+                                    </div>
+                                @endif
+
+                                <div class="text-center mt-4 mb-2">
+                                    <button class="btn btn-dark">Send Mail</button>
+                                </div>
+                            </form>
                         </div>
-                        @endif
-                            <div class="form-group mt-5 mb-3 text-center">
-                            <button type="submit" class="btn btn-primary">Send Mail</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <script>
-        $(document).ready(function() {
-            // Check if the alert element exists
-            if ($('.alert').length) {
-                // Fade out the alert after 2 seconds
-                setTimeout(function() {
-                    $('.alert').fadeOut('slow');
-                }, 2000); // 2000 milliseconds = 2 seconds
-            }
-        });
-        $(document).ready(function() {
-            // Select2 Multiple
-            $('.select2-multiple').select2({
-                placeholder: "Select",
-                allowClear: true
-            });
 
-        });
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-iwU0T7ln4w+cFe6L9LQGp8nJ3I/cEz8+Cp3B5m12U0JgNVXyvqp4u9k9bYOlkp5g" crossorigin="anonymous">
     </script>
 </body>
 
 </html>
+

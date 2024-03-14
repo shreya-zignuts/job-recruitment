@@ -89,7 +89,7 @@
 
                             <div>
                                 <x-input-label for="salary" :value="__('Salary')" />
-                                <x-text-input type="integer" class="form-control mt-1" name="salary" id="salary"
+                                <x-text-input type="number" class="form-control mt-1" name="salary" id="salary"
                                     placeholder="salary in decimal value.. " />
                                 @error('salary')
                                 <div class="alert alert-danger">{{ $message }}</div>

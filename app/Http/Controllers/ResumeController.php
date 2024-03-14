@@ -29,7 +29,7 @@ class ResumeController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'resume' => 'required|mimes:pdf,jpg,png|max:6048', 
+            'resume' => 'required|mimes:pdf', 
         ]);
 
         $user = Auth::user();
