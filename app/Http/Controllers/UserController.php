@@ -29,14 +29,16 @@ class UserController extends Controller
      */
     public function showListings($id)
     {
-        $job = JobListing::find($id);
+        $job = JobListing::with('categories')->find($id);
 
         if(!$job) {
             return redirect()->route('job_seeker.dashboard')->with('fail','Data not found') ;
         }
         
-        $categories = $job->categories;
-        return view('job_seeker.actions.viewJobListing', compact('job', 'categories'));
+        $mailSentKey = 'email_sent_' . auth()->user()->id . '_job_' . $job->id;
+        $mailSent = session($mailSentKey, false);
+
+        return view('job_seeker.actions.viewJobListing', compact('job', 'mailSent'));
 
     }
     

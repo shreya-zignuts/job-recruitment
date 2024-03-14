@@ -83,7 +83,7 @@ class JobListingController extends Controller
         if(!$jobs) {
             return redirect()->route('employer.dashboard')->with('fail','Data not found') ;
         }
-        return view ('employer.actions.viewJobListing', ['job' => $jobs]);
+        return view ('employer.actions.viewJobListing', compacts('jobs','mailSent'));
 
     }
 
@@ -189,6 +189,9 @@ class JobListingController extends Controller
         $employerEmail = $employer->email;
 
         Mail::to($employerEmail)->send(new JobApplicationMail($mailMessage, $resumePath, $userName, $employerName, $userEmail));
+
+        $mailSentKey = 'email_sent_' . auth()->user()->id . '_job_' . $id;
+        session([$mailSentKey => true]);
 
         return redirect()->route('job_seeker.dashboard')->with('success', 'Email sent to employer with resume attached.');
     }
