@@ -60,11 +60,14 @@
             </div>
         </a>
         <div>
-            @if($job->status == 'active')
-            <div class="container text-end">
-                <a href="{{ route('resume.mail',['id' => $job->id]) }}"><button class="btn btn-dark p-2 mt-1">Apply Now</button></a>
-            </div>
-            @endif
+        @if($job->status == 'active')
+                <div class="container text-end">
+                    <a href="{{ route('resume.mail',['id' => $job->id]) }}">
+                        <button class="btn btn-dark p-2 mt-1">Apply Now</button>
+                    </a>
+                </div>
+        @endif
+
             <div class="container mt-3">
                 <div class="mt-3 mb-3">
                     <h3 class="text-center h3 m-0 ">Job Details</h5>

@@ -31,22 +31,31 @@
                             Listings</a></li>
                     <li><a href="{{ route('resume.form') }}" class="nav-link px-2 text-white">Resume</a></li>
                 </ul>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                <div class="d-flex align-items-center">
+                    <span class="me-3">{{ Auth::user()->name }}</span>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        <button type="button" class="btn btn-outline-light me-2">Logout</button>
-                    </x-responsive-nav-link>
-                </form>
+                            <button type="button" class="btn btn-outline-light me-2">Logout</button>
+                        </x-responsive-nav-link>
+                    </form>
+                </div>
             </div>
         </div>
         </div>
     </header>
-    @if(session('fail'))
-    <div class="alert alert-danger">
-        {{ session('fail') }}
+    <div class="container mt-4">
+        @if(session('success'))
+        <div class="alert alert-success text-center" role="alert" id="success">
+            {{ session('success') }}
+        </div>
+        @elseif(session('fail'))
+        <div class="alert alert-danger text-center" role="alert" id="fail">
+            {{ session('fail') }}
+        </div>
+        @endif
     </div>
-    @endif
     <section>
         <div class="row justify-content-center mt-3">
             <div class="col-md-4">
@@ -60,7 +69,9 @@
                             <select class="select2-multiple form-control mt-3 text-center" name="categories[]"
                                 multiple="multiple" id="select2Multiple" style="width: 100%;">
                                 @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" {{ is_array($selectedCategories) && in_array($category->id, $selectedCategories) ? 'selected' : '' }}>{{ $category->name }}</option>
+                                <option value="{{ $category->id }}"
+                                    {{ is_array($selectedCategories) && in_array($category->id, $selectedCategories) ? 'selected' : '' }}>
+                                    {{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -99,10 +110,12 @@
                 @else
                 <div class="container mt-5">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb bg-body-secondary rounded-3" style="display: flex; justify-content: center;">
-                        <li class="breadcrumb-item">
-                            <p class="link-body-emphasis fw-semibold text-decoration-none text-center p-1 mt-3">No data available</p>
-                        </li>
+                        <ol class="breadcrumb bg-body-secondary rounded-3"
+                            style="display: flex; justify-content: center;">
+                            <li class="breadcrumb-item">
+                                <p class="link-body-emphasis fw-semibold text-decoration-none text-center p-1 mt-3">No
+                                    data available</p>
+                            </li>
                         </ol>
                     </nav>
                 </div>
@@ -114,9 +127,10 @@
         <div class="container mt-5">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-body-secondary rounded-3" style="display: flex; justify-content: center;">
-                <li class="breadcrumb-item">
-                    <p class="link-body-emphasis fw-semibold text-decoration-none text-center p-1 mt-3">No Categories Selected</p>
-                </li>
+                    <li class="breadcrumb-item">
+                        <p class="link-body-emphasis fw-semibold text-decoration-none text-center p-1 mt-3">No
+                            Categories Selected</p>
+                    </li>
                 </ol>
             </nav>
         </div>
@@ -125,23 +139,23 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
-    $(document).ready(function() {
-        // Check if the alert element exists
-        if ($('.alert').length) {
-            // Fade out the alert after 2 seconds
-            setTimeout(function() {
-                $('.alert').fadeOut('slow');
-            }, 2000); // 2000 milliseconds = 2 seconds
-        }
-    });
-    $(document).ready(function() {
-        // Select2 Multiple
-        $('.select2-multiple').select2({
-            placeholder: "Select",
-            allowClear: true
+        $(document).ready(function() {
+            // Check if the alert element exists
+            if ($('.alert').length) {
+                // Fade out the alert after 2 seconds
+                setTimeout(function() {
+                    $('.alert').fadeOut('slow');
+                }, 2000); // 2000 milliseconds = 2 seconds
+            }
         });
+        $(document).ready(function() {
+            // Select2 Multiple
+            $('.select2-multiple').select2({
+                placeholder: "Select",
+                allowClear: true
+            });
 
-    });
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">

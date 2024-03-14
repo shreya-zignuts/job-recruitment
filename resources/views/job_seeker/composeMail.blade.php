@@ -5,29 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Application Email</title>
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            height: 100vh;
+        }
 
-<body style="font-family: Arial, sans-serif; margin: 0; padding: 0;">
-    <div style="background-color: #f4f4f4; padding: 20px; height: 100%;">
-        <table style="background-color: #ffffff; border-radius: 50px; overflow: hidden; width: 100%; height: 100%;">
-            <tbody>
-                <tr>
-                    <td style="padding: 20px;">
-                        <h2 style="color: #333333;">Job Application Mail</h2>
-                        <p style="color: #666666;">Hello, {{ $employerName }} </p>
-                        <p style="color: #666666;">Regarding Your Job Listings..</p>
-                        <p style="color: #333333; margin-bottom: 20px;">{{ $mailMessage }}</p>
-                        <h4 class="mt-4" style="margin-top: 16px;">Check Resume Attached</h4>
-                        <hr class="mt-4" style="margin-top: 16px; border: 0; border-top: 1px solid #ccc;">
-                        <div>
-                            <p>Sincerely,<br></p>
-                            <p>{{ $userName }}</p>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .email-content {
+            width: 90%;
+            max-width: 600px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<br>
+<body class="mt-3 mb-3">
+    <div class="container">
+        <div class="card email-content">
+            <div class="card-body">
+                <h5 class="card-title">Dear {{ $employerName }},</h5><br>
+                <p class="card-text">{{ $mailMessage }}</p>
+                <p class="card-text text-center font-weight-bold">Checked Resume Attached</p><hr>
+                <div>
+                <p class="card-text">Warm regards, <br> {{ $userName }}</p>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
+    <br>
+</body><br>
 
 </html>
+

@@ -18,16 +18,19 @@ class JobApplicationMail extends Mailable
     public $mailMessage;
     public $userName;
     public $employerName;
+    public $userEmail;
+
 
     /**
      * Create a new message instance.
      */
-    public function __construct($mailMessage, $resumePath, $userName, $employerName)
+    public function __construct($mailMessage, $resumePath, $userName, $employerName, $userEmail)
     {
         $this->mailMessage = $mailMessage;
         $this->resumePath = $resumePath;
         $this->userName = $userName;
         $this->employerName = $employerName;
+        $this->userEmail = $userEmail;
 
     }
 
@@ -44,7 +47,8 @@ class JobApplicationMail extends Mailable
     public function build()
     { 
         $resumeName = basename($this->resumePath);
-        return $this->view('job_seeker.composeMail')
+        return $this->from($this->userEmail)
+                ->view('job_seeker.composeMail')
                 ->attach(storage_path('app/public/resumes/' . $resumeName), ['as' => $resumeName]);
     }
     /*

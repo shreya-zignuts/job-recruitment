@@ -171,11 +171,16 @@ class JobListingController extends Controller
             return redirect()->route('employer.dashboard')->with('fail', 'Joblisting not found');
         }
 
-        $resumePath = Auth::user()->resume->path;
-        if(!$resumePath){
-            return redirect()->back()->with('fail','Resume not found');
+        $resume = Auth::user()->resume;
+
+        if ($resume) {
+            $resumePath = $resume->path;
+        } else {
+            return redirect()->back()->with('fail', 'Resume not found');
         }
+    
         $userName = Auth::user()->name;
+        $userEmail = Auth::user()->email;
         
         $mailMessage = $request->mailMessage;
 
@@ -183,8 +188,8 @@ class JobListingController extends Controller
         $employerName = $employer->name;
         $employerEmail = $employer->email;
 
-        Mail::to($employerEmail)->send(new JobApplicationMail($mailMessage, $resumePath, $userName, $employerName));
+        Mail::to($employerEmail)->send(new JobApplicationMail($mailMessage, $resumePath, $userName, $employerName, $userEmail));
 
-        return redirect()->back()->with('success', 'Email sent to employer with resume attached.');
+        return redirect()->route('job_seeker.dashboard')->with('success', 'Email sent to employer with resume attached.');
     }
 }
