@@ -79,11 +79,11 @@ class JobListingController extends Controller
      */
     public function allListings($id)
     {
-        $jobs = JobListing::find($id);
-        if(!$jobs) {
+        $job = JobListing::find($id);
+        if(!$job) {
             return redirect()->route('employer.dashboard')->with('fail','Data not found') ;
         }
-        return view ('employer.actions.viewJobListing', compacts('jobs','mailSent'));
+        return view ('employer.actions.viewJobListing', compact('job'));
 
     }
 
